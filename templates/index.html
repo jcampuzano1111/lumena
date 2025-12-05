@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>AURA</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+  <style>
+    .language-switcher .lang-toggle.active {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .share-buttons .btn-share {
+      min-width: 180px;
+    }
+
+    .service-card {
+      height: 100%;
+    }
+
+    .results-row .service-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .results-row .service-card p,
+    .results-row .service-card .card-text {
+      flex-grow: 1;
+    }
+
+    /* ===== NEW LAYOUT: CARDS + FORM (IDENTITY SECTION) ===== */
+    .identity-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .identity-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .identity-card-grid > :last-child {
+      grid-column: 1 / -1;
+    }
+
+    .numerology-card {
+      background: #050910;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid #202632;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 170px;
+    }
+
+    .numerology-card .card-header-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .numerology-card .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #252b39;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #f5a623;
+      flex-shrink: 0;
+    }
+
+    .numerology-card .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .card-number-label {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-number {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .numerology-card .card-description {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .identity-form-panel {
+      background: #050910;
+      border-radius: 16px;
+      border: 1px solid #202632;
+      padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+    }
+
+    .identity-form-panel .form-label {
+      color: #e5e7eb;
+    }
+
+    .identity-form-panel .form-control,
+    .identity-form-panel select.form-control {
+      background: #050910;
+      border-color: #374151;
+      color: #f5f5f5;
+    }
+
+    .identity-form-panel .form-control:focus,
+    .identity-form-panel select.form-control:focus {
+      border-color: #f5a623;
+      box-shadow: none;
+    }
+
+    /* ===== RESULTS BLOCKS (IN SERVICES SECTION) ===== */
+    .results-section {
+      margin-top: 2.5rem;
+    }
+
+    .result-block {
+      margin-bottom: 2rem;
+      padding: 1.3rem 1.5rem;
+      border-radius: 14px;
+      background: #050910;
+      border: 1px solid #1f2937;
+    }
+
+    .result-block h3 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1.25rem;
+    }
+
+    .result-meta {
+      font-size: 0.85rem;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+    }
+
+    .result-essence {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+      color: #e5e7eb;
+    }
+
+    .result-body {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #d1d5db;
+    }
+
+    @media (max-width: 992px) {
+      .identity-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .identity-card-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div
+      class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{{ url_for('index') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename mb-0" data-i18n-key="header_title">Discover who you are</h1>
+      </a>
+
+      <div class="d-flex align-items-center">
+        <!-- Language Switcher -->
+        <div class="language-switcher d-flex align-items-center me-3">
+          <a href="{{ url_for('index', lang='en') }}"
+             class="btn btn-sm btn-outline-light lang-toggle {% if lang == 'en' %}active{% endif %}"
+             data-lang="en">
+            🇬🇧 EN
+          </a>
+          <a href="{{ url_for('index', lang='es') }}"
+             class="btn btn-sm btn-outline-light ms-2 lang-toggle {% if lang == 'es' %}active{% endif %}"
+             data-lang="es">
+            🇪🇸 ES
+          </a>
+        </div>
+
+        <a class="btn-getstarted" href="#identity-form" data-i18n-key="header_cta">SHARE</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 content-col" data-aos="fade-up">
+            <div class="content">
+              <div class="agency-name">
+                <h5 data-i18n-key="hero_kicker">Try it and start your</h5>
+              </div>
+
+              <div class="main-heading">
+                <h1 data-i18n-key="hero_title">AURA<br>DISCOVERY</h1>
+              </div>
+
+              <div class="divider"></div>
+
+              <div class="description">
+                <p data-i18n-key="hero_description">
+                  ✨ Every person arrives in this world carrying a unique vibration — a quiet melody woven into their
+                  name, their birth, and the journey they are meant to walk. Here, we invite you to explore that melody
+                  through the wisdom of Pythagorean numerology.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5" data-aos="zoom-out">
+            <div class="visual-content">
+              <div class="fluid-shape">
+                <img src="{{ url_for('static', filename='img/abstract/abstract-1.png') }}" alt="Abstract Fluid Shape"
+                  class="fluid-img">
+              </div>
+
+              <div class="stats-card">
+                <div class="stats-number">
+                  <h2>5</h2>
+                </div>
+                <div class="stats-label">
+                  <p data-i18n-key="hero_stats_label">Core Numbers</p>
+                </div>
+                <div class="stats-arrow">
+                  <a href="#services"><i class="bi bi-arrow-up-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Hero Section -->
+
+    <!-- Identity Form Section -->
+    <section id="identity-form" class="section light-background">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="identity-layout">
+
+          <!-- Left: cards summarising core numbers (or placeholders) -->
+          <div>
+            <div class="identity-card-grid">
+
+              <!-- Life Path -->
+              <article class="numerology-card">
+                <div class="card-header-row">
+                  <div class="card-icon">⟡</div>
+                  <h3 class="card-title">
+                    {% if numerology and numerology.life_path.title %}
+                      {{ numerology.life_path.title }}
+                    {% else %}
+                      <span data-i18n-key="ph_life_path_title">Life Path Number</span>
+                    {% endif %}
+                  </h3>
+                </div>
+
+                {% if numerology %}
+                  <div class="card-number-label">
+                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                  </div>
+                  <div class="card-number">
+                    {{ numerology.life_path.number }}
+                  </div>
+                  {% if numerology.life_path.essence %}
+                    <p class="card-description">
+                      {{ numerology.life_path.essence }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="card-description" data-i18n-key="ph_life_path_text">
+                    Your main life mission or path. It reveals the core of your personality, your innate talents and the
+                    major lessons you came to learn. It is the most influential number.
+                  </p>
+                {% endif %}
+              </article>
+
+              <!-- Birthday -->
+              <article class="numerology-card">
+                <div class="card-header-row">
+                  <div class="card-icon">☼</div>
+                  <h3 class="card-title">
+                    {% if numerology and numerology.birthday.title %}
+                      {{ numerology.birthday.title }}
+                    {% else %}
+                      <span data-i18n-key="ph_birthday_title">Birthday Number</span>
+                    {% endif %}
+                  </h3>
+                </div>
+
+                {% if numerology %}
+                  <div class="card-number-label">
+                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                  </div>
+                  <div class="card-number">
+                    {{ numerology.birthday.number }}
+                  </div>
+                  {% if numerology.birthday.essence %}
+                    <p class="card-description">
+                      {{ numerology.birthday.essence }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="card-description" data-i18n-key="ph_birthday_text">
+                    A specific talent or trait that has been with you since birth. It acts as a supporting quality that
+                    reinforces your Life Path.
+                  </p>
+                {% endif %}
+              </article>
+
+              <!-- Expression / Destiny -->
+              <article class="numerology-card">
+                <div class="card-header-row">
+                  <div class="card-icon">📣</div>
+                  <h3 class="card-title">
+                    {% if numerology and numerology.expression.title %}
+                      {{ numerology.expression.title }}
+                    {% else %}
+                      <span data-i18n-key="ph_expression_title">Expression / Destiny</span>
+                    {% endif %}
+                  </h3>
+                </div>
+
+                {% if numerology %}
+                  <div class="card-number-label">
+                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                  </div>
+                  <div class="card-number">
+                    {{ numerology.expression.number }}
+                  </div>
+                  {% if numerology.expression.essence %}
+                    <p class="card-description">
+                      {{ numerology.expression.essence }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="card-description" data-i18n-key="ph_expression_text">
+                    Your potential and abilities. It represents what you came here to do with your life, highlighting
+                    your tools, talents and ideal directions or careers.
+                  </p>
+                {% endif %}
+              </article>
+
+              <!-- Soul Urge -->
+              <article class="numerology-card">
+                <div class="card-header-row">
+                  <div class="card-icon">❤</div>
+                  <h3 class="card-title">
+                    {% if numerology and numerology.soul_urge.title %}
+                      {{ numerology.soul_urge.title }}
+                    {% else %}
+                      <span data-i18n-key="ph_soul_title">Soul Urge</span>
+                    {% endif %}
+                  </h3>
+                </div>
+
+                {% if numerology and numerology.soul_urge.number %}
+                  <div class="card-number-label">
+                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                  </div>
+                  <div class="card-number">
+                    {{ numerology.soul_urge.number }}
+                  </div>
+                  {% if numerology.soul_urge.essence %}
+                    <p class="card-description">
+                      {{ numerology.soul_urge.essence }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="card-description" data-i18n-key="ph_soul_text">
+                    Your inner desires, motivations and impulses. It points to what makes you feel most fulfilled and
+                    what you truly long for deep inside.
+                  </p>
+                {% endif %}
+              </article>
+
+              <!-- Personality -->
+              <article class="numerology-card">
+                <div class="card-header-row">
+                  <div class="card-icon">👁</div>
+                  <h3 class="card-title">
+                    {% if numerology and numerology.personality.title %}
+                      {{ numerology.personality.title }}
+                    {% else %}
+                      <span data-i18n-key="ph_personality_title">Personality</span>
+                    {% endif %}
+                  </h3>
+                </div>
+
+                {% if numerology and numerology.personality.number %}
+                  <div class="card-number-label">
+                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                  </div>
+                  <div class="card-number">
+                    {{ numerology.personality.number }}
+                  </div>
+                  {% if numerology.personality.essence %}
+                    <p class="card-description">
+                      {{ numerology.personality.essence }}
+                    </p>
+                  {% endif %}
+                {% else %}
+                  <p class="card-description" data-i18n-key="ph_personality_text">
+                    The first impression you give to others. It is the social mask or outer image you project to the
+                    world.
+                  </p>
+                {% endif %}
+              </article>
+
+            </div>
+          </div>
+
+          <!-- Right: form panel -->
+          <aside class="identity-form-panel">
+            <div class="contact-form-wrapper">
+              <h2 class="text-center mb-4" data-i18n-key="form_title">Tell Us About Yourself</h2>
+              <p class="text-center mb-4" data-i18n-key="form_subtitle">
+                Share a few details and we’ll calculate your 5 core Pythagorean numerology numbers.
+              </p>
+
+              {% if form_error %}
+              <div class="alert alert-warning text-center mb-3">
+                {{ form_error }}
+              </div>
+              {% endif %}
+
+              <form action="{{ url_for('who_am_i') }}" method="post" class="php-email-form">
+                <div class="row g-3">
+
+                  <!-- First Name -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="first_name" class="form-label" data-i18n-key="label_first_name">First Name</label>
+                      <div class="input-with-icon">
+                        <i class="bi bi-person"></i>
+                        <input type="text" class="form-control" id="first_name" name="first_name"
+                          placeholder="First Name" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Second Name (Optional) -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="second_name" class="form-label" data-i18n-key="label_second_name">
+                        Second Name <span class="text-muted">(Optional)</span>
+                      </label>
+                      <div class="input-with-icon">
+                        <i class="bi bi-person"></i>
+                        <input type="text" class="form-control" id="second_name" name="second_name"
+                          placeholder="Second Name">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Last Names -->
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="last_names" class="form-label" data-i18n-key="label_last_names">Last Names</label>
+                      <div class="input-with-icon">
+                        <i class="bi bi-person-badge"></i>
+                        <input type="text" class="form-control" id="last_names" name="last_names"
+                          placeholder="Last Names" required>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Date of Birth (datepicker) -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="date_of_birth" class="form-label" data-i18n-key="label_dob">Date of Birth</label>
+                      <div class="input-with-icon">
+                        <i class="bi bi-calendar-event"></i>
+                        <!-- max="{{ today }}" so it can't be in the future -->
+                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required
+                          max="{{ today }}">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Country of Birth (Dropdown) -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="country_of_birth" class="form-label" data-i18n-key="label_country">
+                        Country of Birth
+                      </label>
+                      <div class="input-with-icon">
+                        <i class="bi bi-geo-alt"></i>
+                        <select class="form-control" id="country_of_birth" name="country_of_birth" required>
+                          <option value="" data-i18n-key="country_select_placeholder">Select a country</option>
+                          <!-- full country list unchanged from your working code -->
+                          <option value="Afghanistan">Afghanistan</option>
+                          <option value="Albania">Albania</option>
+                          <option value="Algeria">Algeria</option>
+                          <option value="Andorra">Andorra</option>
+                          <option value="Angola">Angola</option>
+                          <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                          <option value="Argentina">Argentina</option>
+                          <option value="Armenia">Armenia</option>
+                          <option value="Australia">Australia</option>
+                          <option value="Austria">Austria</option>
+                          <option value="Azerbaijan">Azerbaijan</option>
+                          <option value="Bahamas">Bahamas</option>
+                          <option value="Bahrain">Bahrain</option>
+                          <option value="Bangladesh">Bangladesh</option>
+                          <option value="Barbados">Barbados</option>
+                          <option value="Belarus">Belarus</option>
+                          <option value="Belgium">Belgium</option>
+                          <option value="Belize">Belize</option>
+                          <option value="Benin">Benin</option>
+                          <option value="Bhutan">Bhutan</option>
+                          <option value="Bolivia">Bolivia</option>
+                          <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                          <option value="Botswana">Botswana</option>
+                          <option value="Brazil">Brazil</option>
+                          <option value="Brunei">Brunei</option>
+                          <option value="Bulgaria">Bulgaria</option>
+                          <option value="Burkina Faso">Burkina Faso</option>
+                          <option value="Burundi">Burundi</option>
+                          <option value="Cabo Verde">Cabo Verde</option>
+                          <option value="Cambodia">Cambodia</option>
+                          <option value="Cameroon">Cameroon</option>
+                          <option value="Canada">Canada</option>
+                          <option value="Central African Republic">Central African Republic</option>
+                          <option value="Chad">Chad</option>
+                          <option value="Chile">Chile</option>
+                          <option value="China">China</option>
+                          <option value="Colombia">Colombia</option>
+                          <option value="Comoros">Comoros</option>
+                          <option value="Congo, Democratic Republic of the">Congo, Democratic Republic of the</option>
+                          <option value="Congo, Republic of the">Congo, Republic of the</option>
+                          <option value="Costa Rica">Costa Rica</option>
+                          <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                          <option value="Croatia">Croatia</option>
+                          <option value="Cuba">Cuba</option>
+                          <option value="Cyprus">Cyprus</option>
+                          <option value="Czech Republic">Czech Republic</option>
+                          <option value="Denmark">Denmark</option>
+                          <option value="Djibouti">Djibouti</option>
+                          <option value="Dominica">Dominica</option>
+                          <option value="Dominican Republic">Dominican Republic</option>
+                          <option value="Ecuador">Ecuador</option>
+                          <option value="Egypt">Egypt</option>
+                          <option value="El Salvador">El Salvador</option>
+                          <option value="Equatorial Guinea">Equatorial Guinea</option>
+                          <option value="Eritrea">Eritrea</option>
+                          <option value="Estonia">Estonia</option>
+                          <option value="Eswatini">Eswatini</option>
+                          <option value="Ethiopia">Ethiopia</option>
+                          <option value="Fiji">Fiji</option>
+                          <option value="Finland">Finland</option>
+                          <option value="France">France</option>
+                          <option value="Gabon">Gabon</option>
+                          <option value="Gambia">Gambia</option>
+                          <option value="Georgia">Georgia</option>
+                          <option value="Germany">Germany</option>
+                          <option value="Ghana">Ghana</option>
+                          <option value="Greece">Greece</option>
+                          <option value="Grenada">Grenada</option>
+                          <option value="Guatemala">Guatemala</option>
+                          <option value="Guinea">Guinea</option>
+                          <option value="Guinea-Bissau">Guinea-Bissau</option>
+                          <option value="Guyana">Guyana</option>
+                          <option value="Haiti">Haiti</option>
+                          <option value="Honduras">Honduras</option>
+                          <option value="Hungary">Hungary</option>
+                          <option value="Iceland">Iceland</option>
+                          <option value="India">India</option>
+                          <option value="Indonesia">Indonesia</option>
+                          <option value="Iran">Iran</option>
+                          <option value="Iraq">Iraq</option>
+                          <option value="Ireland">Ireland</option>
+                          <option value="Israel">Israel</option>
+                          <option value="Italy">Italy</option>
+                          <option value="Jamaica">Jamaica</option>
+                          <option value="Japan">Japan</option>
+                          <option value="Jordan">Jordan</option>
+                          <option value="Kazakhstan">Kazakhstan</option>
+                          <option value="Kenya">Kenya</option>
+                          <option value="Kiribati">Kiribati</option>
+                          <option value="Kuwait">Kuwait</option>
+                          <option value="Kyrgyzstan">Kyrgyzstan</option>
+                          <option value="Laos">Laos</option>
+                          <option value="Latvia">Latvia</option>
+                          <option value="Lebanon">Lebanon</option>
+                          <option value="Lesotho">Lesotho</option>
+                          <option value="Liberia">Liberia</option>
+                          <option value="Libya">Libya</option>
+                          <option value="Liechtenstein">Liechtenstein</option>
+                          <option value="Lithuania">Lithuania</option>
+                          <option value="Luxembourg">Luxembourg</option>
+                          <option value="Madagascar">Madagascar</option>
+                          <option value="Malawi">Malawi</option>
+                          <option value="Malaysia">Malaysia</option>
+                          <option value="Maldives">Maldives</option>
+                          <option value="Mali">Mali</option>
+                          <option value="Malta">Malta</option>
+                          <option value="Marshall Islands">Marshall Islands</option>
+                          <option value="Mauritania">Mauritania</option>
+                          <option value="Mauritius">Mauritius</option>
+                          <option value="Mexico">Mexico</option>
+                          <option value="Micronesia">Micronesia</option>
+                          <option value="Moldova">Moldova</option>
+                          <option value="Monaco">Monaco</option>
+                          <option value="Mongolia">Mongolia</option>
+                          <option value="Montenegro">Montenegro</option>
+                          <option value="Morocco">Morocco</option>
+                          <option value="Mozambique">Mozambique</option>
+                          <option value="Myanmar">Myanmar</option>
+                          <option value="Namibia">Namibia</option>
+                          <option value="Nauru">Nauru</option>
+                          <option value="Nepal">Nepal</option>
+                          <option value="Netherlands">Netherlands</option>
+                          <option value="New Zealand">New Zealand</option>
+                          <option value="Nicaragua">Nicaragua</option>
+                          <option value="Niger">Niger</option>
+                          <option value="Nigeria">Nigeria</option>
+                          <option value="North Korea">North Korea</option>
+                          <option value="North Macedonia">North Macedonia</option>
+                          <option value="Norway">Norway</option>
+                          <option value="Oman">Oman</option>
+                          <option value="Pakistan">Pakistan</option>
+                          <option value="Palau">Palau</option>
+                          <option value="Panama">Panama</option>
+                          <option value="Papua New Guinea">Papua New Guinea</option>
+                          <option value="Paraguay">Paraguay</option>
+                          <option value="Peru">Peru</option>
+                          <option value="Philippines">Philippines</option>
+                          <option value="Poland">Poland</option>
+                          <option value="Portugal">Portugal</option>
+                          <option value="Qatar">Qatar</option>
+                          <option value="Romania">Romania</option>
+                          <option value="Russia">Russia</option>
+                          <option value="Rwanda">Rwanda</option>
+                          <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                          <option value="Saint Lucia">Saint Lucia</option>
+                          <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                          <option value="Samoa">Samoa</option>
+                          <option value="San Marino">San Marino</option>
+                          <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                          <option value="Saudi Arabia">Saudi Arabia</option>
+                          <option value="Senegal">Senegal</option>
+                          <option value="Serbia">Serbia</option>
+                          <option value="Seychelles">Seychelles</option>
+                          <option value="Sierra Leone">Sierra Leone</option>
+                          <option value="Singapore">Singapore</option>
+                          <option value="Slovakia">Slovakia</option>
+                          <option value="Slovenia">Slovenia</option>
+                          <option value="Solomon Islands">Solomon Islands</option>
+                          <option value="Somalia">Somalia</option>
+                          <option value="South Africa">South Africa</option>
+                          <option value="South Korea">South Korea</option>
+                          <option value="South Sudan">South Sudan</option>
+                          <option value="Spain">Spain</option>
+                          <option value="Sri Lanka">Sri Lanka</option>
+                          <option value="Sudan">Sudan</option>
+                          <option value="Suriname">Suriname</option>
+                          <option value="Sweden">Sweden</option>
+                          <option value="Switzerland">Switzerland</option>
+                          <option value="Syria">Syria</option>
+                          <option value="Taiwan">Taiwan</option>
+                          <option value="Tajikistan">Tajikistan</option>
+                          <option value="Tanzania">Tanzania</option>
+                          <option value="Thailand">Thailand</option>
+                          <option value="Timor-Leste">Timor-Leste</option>
+                          <option value="Togo">Togo</option>
+                          <option value="Tonga">Tonga</option>
+                          <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                          <option value="Tunisia">Tunisia</option>
+                          <option value="Turkey">Turkey</option>
+                          <option value="Turkmenistan">Turkmenistan</option>
+                          <option value="Tuvalu">Tuvalu</option>
+                          <option value="Uganda">Uganda</option>
+                          <option value="Ukraine">Ukraine</option>
+                          <option value="United Arab Emirates">United Arab Emirates</option>
+                          <option value="United Kingdom">United Kingdom</option>
+                          <option value="United States">United States</option>
+                          <option value="Uruguay">Uruguay</option>
+                          <option value="Uzbekistan">Uzbekistan</option>
+                          <option value="Vanuatu">Vanuatu</option>
+                          <option value="Venezuela">Venezuela</option>
+                          <option value="Vietnam">Vietnam</option>
+                          <option value="Yemen">Yemen</option>
+                          <option value="Zambia">Zambia</option>
+                          <option value="Zimbabwe">Zimbabwe</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Loader / Messages -->
+                  <div class="col-12">
+                    <div class="loading d-none">Loading</div>
+                    <div class="error-message text-center text-danger small"></div>
+                    <div class="sent-message d-none">Your data has been sent. Thank you!</div>
+                  </div>
+
+                  <!-- CTA Button -->
+                  <div class="col-12 text-center mt-2">
+                    <button type="submit" class="btn btn-primary btn-submit" data-i18n-key="btn_who_am_i">
+                      Who Am I
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /Identity Form Section -->
+
+    <!-- Services / Results Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2 data-i18n-key="services_title">Your Core Numbers</h2>
+        <div>
+          <span data-i18n-key="services_subtitle_1">Discover Your</span>
+          <span class="description-title" data-i18n-key="services_subtitle_2">Pythagorean Blueprint</span>
+        </div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="service-header">
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-md-12">
+              <div class="service-intro">
+                <h2 class="service-heading">
+                  <div data-i18n-key="services_heading_line1">Your 5 Central Numbers</div>
+                  <div>
+                    <span data-i18n-key="services_heading_line2">decoded from your name and birth</span>
+                  </div>
+                </h2>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+              <div class="service-summary">
+                {% if numerology %}
+                <p data-i18n-key="services_intro_with_data">
+                  These interpretations are uniquely calculated from your full name and date of birth.
+                  Each number reveals a different layer of your essence, purpose and way of being in the world.
+                </p>
+                {% else %}
+                <p data-i18n-key="services_intro_no_data">
+                  Once you complete the form above, this section will reveal your 5 central Pythagorean numbers,
+                  with deep, personalized interpretations of your path and inner nature.
+                </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if numerology %}
+        <!-- ========== DETAILED RESULTS ========== -->
+        <div class="results-section" id="results">
+
+          <!-- Life Path details -->
+          <article class="result-block">
+            <h3>{{ numerology.life_path.title }} ({{ numerology.life_path.number }})</h3>
+            {% if numerology.life_path.category_description %}
+              <div class="result-meta">{{ numerology.life_path.category_description }}</div>
+            {% endif %}
+            {% if numerology.life_path.essence %}
+              <div class="result-essence">{{ numerology.life_path.essence }}</div>
+            {% endif %}
+            {% if numerology.life_path.expanded %}
+              <div class="result-body">{{ numerology.life_path.expanded|safe }}</div>
+            {% endif %}
+          </article>
+
+          <!-- Birthday -->
+          <article class="result-block">
+            <h3>{{ numerology.birthday.title }} ({{ numerology.birthday.number }})</h3>
+            {% if numerology.birthday.category_description %}
+              <div class="result-meta">{{ numerology.birthday.category_description }}</div>
+            {% endif %}
+            {% if numerology.birthday.essence %}
+              <div class="result-essence">{{ numerology.birthday.essence }}</div>
+            {% endif %}
+            {% if numerology.birthday.expanded %}
+              <div class="result-body">{{ numerology.birthday.expanded|safe }}</div>
+            {% endif %}
+          </article>
+
+          <!-- Expression -->
+          <article class="result-block">
+            <h3>{{ numerology.expression.title }} ({{ numerology.expression.number }})</h3>
+            {% if numerology.expression.category_description %}
+              <div class="result-meta">{{ numerology.expression.category_description }}</div>
+            {% endif %}
+            {% if numerology.expression.essence %}
+              <div class="result-essence">{{ numerology.expression.essence }}</div>
+            {% endif %}
+            {% if numerology.expression.expanded %}
+              <div class="result-body">{{ numerology.expression.expanded|safe }}</div>
+            {% endif %}
+          </article>
+
+          <!-- Soul Urge (if any) -->
+          {% if numerology.soul_urge.number %}
+          <article class="result-block">
+            <h3>{{ numerology.soul_urge.title }} ({{ numerology.soul_urge.number }})</h3>
+            {% if numerology.soul_urge.category_description %}
+              <div class="result-meta">{{ numerology.soul_urge.category_description }}</div>
+            {% endif %}
+            {% if numerology.soul_urge.essence %}
+              <div class="result-essence">{{ numerology.soul_urge.essence }}</div>
+            {% endif %}
+            {% if numerology.soul_urge.expanded %}
+              <div class="result-body">{{ numerology.soul_urge.expanded|safe }}</div>
+            {% endif %}
+          </article>
+          {% endif %}
+
+          <!-- Personality (if any) -->
+          {% if numerology.personality.number %}
+          <article class="result-block">
+            <h3>{{ numerology.personality.title }} ({{ numerology.personality.number }})</h3>
+            {% if numerology.personality.category_description %}
+              <div class="result-meta">{{ numerology.personality.category_description }}</div>
+            {% endif %}
+            {% if numerology.personality.essence %}
+              <div class="result-essence">{{ numerology.personality.essence }}</div>
+            {% endif %}
+            {% if numerology.personality.expanded %}
+              <div class="result-body">{{ numerology.personality.expanded|safe }}</div>
+            {% endif %}
+          </article>
+          {% endif %}
+
+          <!-- Master & Karmic Numbers -->
+          {% if numerology.special_numbers and (numerology.master_details or numerology.karmic_details) %}
+          <article class="result-block">
+            <h3>
+              {% if lang == 'es' %}
+                Números Maestros y Kármicos
+              {% else %}
+                Master & Karmic Numbers
+              {% endif %}
+            </h3>
+
+            {% if numerology.master_details and numerology.master_details|length > 0 %}
+              {% for master in numerology.master_details %}
+                <div class="result-meta">
+                  {% if lang == 'es' %}Número Maestro{% else %}Master Number{% endif %} {{ master.number }}
+                </div>
+                <div class="result-body">
+                  <strong>{{ master.data.title }}</strong><br><br>
+                  {{ master.data.expanded|safe }}
+                </div>
+                <br>
+              {% endfor %}
+            {% endif %}
+
+            {% if numerology.karmic_details and numerology.karmic_details|length > 0 %}
+              <div class="result-meta">
+                {% if lang == 'es' %}Números Kármicos Detectados{% else %}Karmic Numbers Detected{% endif %}
+              </div>
+              <div class="result-body">
+                <ul>
+                  {% for karmic in numerology.karmic_details %}
+                    <li><strong>{{ karmic.number }}</strong> — {{ karmic.description }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </article>
+          {% endif %}
+
+        </div><!-- /results-section -->
+
+        <!-- Share buttons centered, sharing the detailed results -->
+        <div class="row mt-4">
+          <div class="col-12 text-center share-buttons">
+            <button id="share-whatsapp" type="button"
+              class="btn btn-success btn-share mx-2 mb-2" data-i18n-key="share_whatsapp">
+              Share on WhatsApp
+            </button>
+            <button id="share-facebook" type="button"
+              class="btn btn-primary btn-share mx-2 mb-2" data-i18n-key="share_facebook">
+              Share on Facebook
+            </button>
+          </div>
+        </div>
+
+        {% endif %}
+
+      </div>
+
+    </section><!-- /Services / Results Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">
+
+          <div class="content-left flex-grow-1" data-aos="fade-right" data-aos-delay="200">
+            <span class="badge text-uppercase mb-2" data-i18n-key="cta_badge">Reflection</span>
+            <h2 data-i18n-key="cta_title">Let your numbers start a conversation with you</h2>
+            <p class="my-4" data-i18n-key="cta_text">
+              This tool is not about predicting fate. It offers a symbolic mirror so you can explore patterns, choices
+              and possibilities with more awareness.
+            </p>
+
+            <div class="features d-flex flex-wrap gap-3 mb-4">
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span data-i18n-key="cta_feature_1">Gentle self-knowledge</span>
+              </div>
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span data-i18n-key="cta_feature_2">Symbolic insights</span>
+              </div>
+              <div class="feature-item">
+                <i class="bi bi-check-circle-fill"></i>
+                <span data-i18n-key="cta_feature_3">Personal reflection</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-right position-relative" data-aos="fade-left" data-aos-delay="300">
+            <img src="{{ url_for('static', filename='img/misc/misc-1.jpg') }}" alt="Digital Platform"
+              class="img-fluid rounded-4">
+            <div class="floating-card">
+              <div class="card-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div class="card-content">
+                <span class="stats-number">5</span>
+                <span class="stats-text" data-i18n-key="cta_stats_text">Central Numbers</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="decoration">
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-5 col-md-12 footer-about">
+          <a href="{{ url_for('index') }}" class="logo d-flex align-items-center">
+            <span class="sitename">AURA</span>
+          </a>
+          <p data-i18n-key="footer_about">
+            Numerology here is used as a symbolic map — a playful, reflective lens to explore who you are, not as fixed
+            destiny.
+          </p>
+          <div class="social-links d-flex mt-4">
+            <a href="#"><i class="bi bi-twitter-x"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4 data-i18n-key="footer_links_title">Useful Links</h4>
+          <ul>
+            <li><a href="#hero" data-i18n-key="footer_link_home">Home</a></li>
+            <li><a href="#identity-form" data-i18n-key="footer_link_form">Form</a></li>
+            <li><a href="#services" data-i18n-key="footer_link_core">Core Numbers</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-6 footer-links">
+          <h4 data-i18n-key="footer_explore_title">Explore</h4>
+          <ul>
+            <li><a href="#services" data-i18n-key="footer_explore_life">Life Path</a></li>
+            <li><a href="#services" data-i18n-key="footer_explore_soul">Soul Urge</a></li>
+            <li><a href="#services" data-i18n-key="footer_explore_personality">Personality</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+          <h4 data-i18n-key="footer_disclaimer_title">Disclaimer</h4>
+          <p data-i18n-key="footer_disclaimer_text">
+            This experience is for reflection and self-knowledge only and does not replace professional, medical or
+            psychological advice.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>
+        © <span>Copyright</span> <strong class="px-1 sitename">AURA</strong> <span data-i18n-key="footer_rights">All
+          Rights Reserved</span>
+      </p>
+      <div class="credits">
+        Template base by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  <!-- Custom i18n, validation, share & scroll logic -->
+  <script>
+    (function () {
+      const translations = {
+        en: {
+          page_title: "AURA — Numerology Blueprint",
+          header_title: "Discover who you are",
+          header_cta: "SHARE",
+          hero_kicker: "Try it and start your",
+          hero_title: "AURA<br>DISCOVERY",
+          hero_description: "✨ Every person arrives in this world carrying a unique vibration — a quiet melody woven into their name, their birth, and the journey they are meant to walk. Here, we invite you to explore that melody through the wisdom of Pythagorean numerology.",
+          hero_stats_label: "Core Numbers",
+
+          form_title: "Tell Us About Yourself",
+          form_subtitle: "Share a few details and we’ll calculate your 5 core Pythagorean numerology numbers.",
+          label_first_name: "First Name",
+          label_second_name: "Second Name <span class=\"text-muted\">(Optional)</span>",
+          label_last_names: "Last Names",
+          label_dob: "Date of Birth",
+          label_country: "Country of Birth",
+          country_select_placeholder: "Select a country",
+          btn_who_am_i: "Who Am I",
+
+          services_title: "Your Core Numbers",
+          services_subtitle_1: "Discover Your",
+          services_subtitle_2: "Pythagorean Blueprint",
+          services_heading_line1: "Your 5 Central Numbers",
+          services_heading_line2: "decoded from your name and birth",
+          services_intro_with_data: "These interpretations are uniquely calculated from your full name and date of birth. Each number reveals a different layer of your essence, purpose and way of being in the world.",
+          services_intro_no_data: "Once you complete the form above, this section will reveal your 5 central Pythagorean numbers, with deep, personalized interpretations of your path and inner nature.",
+
+          card_birthday_title: "Birth Day Gift",
+          card_expression_title: "Expression / Destiny",
+          card_soul_title: "Soul Urge",
+          card_personality_title: "Personality",
+          card_special_badge: "Special Numbers",
+          card_special_title_with: "Master &amp; Karmic Numbers Present",
+          card_special_intro: "In your core chart we found the following special vibrations:",
+          card_special_intro_2: "These numbers indicate intensified lessons, gifts or karmic themes.",
+          card_karmic_title: "Karmic Numbers Detected",
+          card_special_title_without: "No Master or Karmic Numbers Detected",
+          card_special_no_data: "Your main numbers are expressed in their standard form (1–9), without master or karmic intensifiers. This is not “better or worse”, it simply indicates a more linear, direct path of learning.",
+
+          /* Updated placeholders with your descriptions */
+          ph_life_path_title: "Life Path Number",
+          ph_life_path_text: "Your main life mission or path. It reveals the core of your personality, your innate talents and the major lessons you came to learn. It is the most influential number.",
+          ph_birthday_title: "Birthday Number",
+          ph_birthday_text: "A specific talent or trait that has been with you since birth. It acts as a supporting quality that reinforces your Life Path.",
+          ph_expression_title: "Expression / Destiny",
+          ph_expression_text: "Your potential and abilities. It represents what you came here to do with your life, highlighting your tools, talents and ideal directions or careers.",
+          ph_soul_title: "Soul Urge",
+          ph_soul_text: "Your inner desires, motivations and impulses. It points to what makes you feel most fulfilled and what you truly long for deep inside.",
+          ph_personality_title: "Personality",
+          ph_personality_text: "The first impression you give to others. It is the social mask or outer image you project to the world.",
+          ph_special_title: "Special Numbers",
+          ph_special_text: "If any of your core numbers is a Master or Karmic Number, this card will highlight it and expand on its deeper meaning in your journey.",
+
+          cta_badge: "Reflection",
+          cta_title: "Let your numbers start a conversation with you",
+          cta_text: "This tool is not about predicting fate. It offers a symbolic mirror so you can explore patterns, choices and possibilities with more awareness.",
+          cta_feature_1: "Gentle self-knowledge",
+          cta_feature_2: "Symbolic insights",
+          cta_feature_3: "Personal reflection",
+          cta_stats_text: "Central Numbers",
+
+          footer_about: "Numerology here is used as a symbolic map — a playful, reflective lens to explore who you are, not as fixed destiny.",
+          footer_links_title: "Useful Links",
+          footer_link_home: "Home",
+          footer_link_form: "Form",
+          footer_link_core: "Core Numbers",
+          footer_explore_title: "Explore",
+          footer_explore_life: "Life Path",
+          footer_explore_soul: "Soul Urge",
+          footer_explore_personality: "Personality",
+          footer_disclaimer_title: "Disclaimer",
+          footer_disclaimer_text: "This experience is for reflection and self-knowledge only and does not replace professional, medical or psychological advice.",
+          footer_rights: "All Rights Reserved",
+
+          share_whatsapp: "Share on WhatsApp",
+          share_facebook: "Share on Facebook"
+        },
+        es: {
+          page_title: "AURA — Mapa Numerológico",
+          header_title: "Descubre quién eres",
+          header_cta: "COMPARTIR",
+          hero_kicker: "Inténtalo y comienza tu",
+          hero_title: "AURA<br>DISCOVERY",
+          hero_description: "✨ Cada persona llega a este mundo con una vibración única: una melodía silenciosa tejida en su nombre, su nacimiento y el camino que vino a recorrer. Aquí te invitamos a explorar esa melodía a través de la sabiduría de la numerología pitagórica.",
+          hero_stats_label: "Números centrales",
+
+          form_title: "Cuéntanos sobre ti",
+          form_subtitle: "Comparte algunos datos y calcularemos tus 5 números pitagóricos centrales.",
+          label_first_name: "Primer nombre",
+          label_second_name: "Segundo nombre <span class=\"text-muted\">(opcional)</span>",
+          label_last_names: "Apellidos",
+          label_dob: "Fecha de nacimiento",
+          label_country: "País de nacimiento",
+          country_select_placeholder: "Selecciona un país",
+          btn_who_am_i: "¿Quién soy?",
+
+          services_title: "Tus números centrales",
+          services_subtitle_1: "Descubre tu",
+          services_subtitle_2: "Mapa Pitagórico",
+          services_heading_line1: "Tus 5 números centrales",
+          services_heading_line2: "calculados desde tu nombre y fecha de nacimiento",
+          services_intro_with_data: "Estas interpretaciones se calculan a partir de tu nombre completo y tu fecha de nacimiento. Cada número revela una capa distinta de tu esencia, propósito y forma de estar en el mundo.",
+          services_intro_no_data: "Cuando completes el formulario de arriba, esta sección mostrará tus 5 números pitagóricos centrales, con interpretaciones profundas y personalizadas de tu camino y tu naturaleza interior.",
+
+          card_birthday_title: "Regalo de tu día de nacimiento",
+          card_expression_title: "Número de Expresión / Destino",
+          card_soul_title: "Número del Alma",
+          card_personality_title: "Número de Personalidad",
+          card_special_badge: "Números especiales",
+          card_special_title_with: "Números Maestros y Kármicos presentes",
+          card_special_intro: "En tu mapa central encontramos las siguientes vibraciones especiales:",
+          card_special_intro_2: "Estos números indican lecciones, dones o temas kármicos intensificados.",
+          card_karmic_title: "Números Kármicos detectados",
+          card_special_title_without: "No se detectaron Números Maestros o Kármicos",
+          card_special_no_data: "Tus números principales se expresan en su forma estándar (1–9), sin intensificadores maestros ni kármicos. Esto no es “mejor ni peor”, solo indica un camino de aprendizaje más lineal y directo.",
+
+          /* Placeholders (Spanish) */
+          ph_life_path_title: "Camino de Vida",
+          ph_life_path_text: "La misión principal o el camino de la vida. Revela la esencia de tu personalidad, tus talentos innatos y las grandes lecciones que viniste a aprender. Es el número más influyente.",
+          ph_birthday_title: "Día de Nacimiento",
+          ph_birthday_text: "Un talento o rasgo específico que te acompaña desde el nacimiento. Actúa como un rasgo de apoyo a tu Camino de Vida.",
+          ph_expression_title: "Número de Expresión / Destino",
+          ph_expression_text: "Tu potencial y tus habilidades. Representa lo que viniste a hacer con tu vida y muestra tus herramientas, talentos y los caminos profesionales más afines a ti.",
+          ph_soul_title: "Deseo del Alma",
+          ph_soul_text: "Tus deseos, motivaciones e impulsos internos. Es lo que te hace sentir más realizado y lo que realmente quieres en lo profundo.",
+          ph_personality_title: "Número de Personalidad",
+          ph_personality_text: "La primera impresión que das a los demás. Es la máscara social o la apariencia externa que proyectas al mundo.",
+          ph_special_title: "Números especiales",
+          ph_special_text: "Si alguno de tus números centrales es Maestro o Kármico, esta tarjeta lo resaltará y ampliará su significado más profundo en tu viaje.",
+
+          cta_badge: "Reflexión",
+          cta_title: "Deja que tus números inicien una conversación contigo",
+          cta_text: "Esta herramienta no pretende predecir tu destino. Es un espejo simbólico para explorar patrones, decisiones y posibilidades con más consciencia.",
+          cta_feature_1: "Autoconocimiento suave",
+          cta_feature_2: "Insight simbólico",
+          cta_feature_3: "Reflexión personal",
+          cta_stats_text: "Números centrales",
+
+          footer_about: "Aquí usamos la numerología como un mapa simbólico: una lente lúdica y reflexiva para explorar quién eres, no como un destino fijo.",
+          footer_links_title: "Enlaces útiles",
+          footer_link_home: "Inicio",
+          footer_link_form: "Formulario",
+          footer_link_core: "Números centrales",
+          footer_explore_title: "Explora",
+          footer_explore_life: "Camino de Vida",
+          footer_explore_soul: "Número del Alma",
+          footer_explore_personality: "Número de Personalidad",
+          footer_disclaimer_title: "Aviso",
+          footer_disclaimer_text: "Esta experiencia es solo para reflexión y autoconocimiento y no reemplaza consejos profesionales, médicos o psicológicos.",
+          footer_rights: "Todos los derechos reservados",
+
+          share_whatsapp: "Compartir por WhatsApp",
+          share_facebook: "Compartir en Facebook"
+        }
+      };
+
+      const serverLang = "{{ lang }}";
+      // 🔧 prioridad: lo que ya eligió el usuario, luego lo que manda el servidor, luego EN
+      let currentLang = localStorage.getItem("aura_lang") || serverLang || "en";
+
+      function applyTranslations(lang) {
+        const dict = translations[lang] || translations.en;
+        document.documentElement.setAttribute("lang", lang === "es" ? "es" : "en");
+
+        // Cambiar título de la pestaña
+        if (dict.page_title) {
+          document.title = dict.page_title;
+        }
+
+        // Cambiar todos los textos con data-i18n-key
+        document.querySelectorAll("[data-i18n-key]").forEach(function (el) {
+          const key = el.getAttribute("data-i18n-key");
+          if (!key) return;
+          const value = dict[key];
+          if (typeof value === "string") {
+            el.innerHTML = value;
+          }
+        });
+
+        // Estilos activos en botones de idioma
+        document.querySelectorAll(".lang-toggle").forEach(function (btn) {
+          btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+        });
+
+        currentLang = lang;
+        localStorage.setItem("aura_lang", lang);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasNumerology = {{ 'true' if numerology else 'false' }};
+        const hasFormError = {{ 'true' if form_error else 'false' }};
+
+        // Aplicar idioma desde servidor/localStorage
+        applyTranslations(currentLang);
+
+        // Language switcher: solo actualiza localStorage, dejamos que el link recargue la página
+        document.querySelectorAll(".lang-toggle").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const lang = this.getAttribute("data-lang") || "en";
+            localStorage.setItem("aura_lang", lang);
+          });
+        });
+
+        // Max date = today para DOB (backup in JS)
+        const dobInput = document.getElementById("date_of_birth");
+        if (dobInput && !dobInput.max) {
+          const todayJs = new Date().toISOString().split("T")[0];
+          dobInput.setAttribute("max", todayJs);
+        }
+
+        // Validación cliente: año 4 dígitos, no futuro
+        const form = document.querySelector(".php-email-form");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            const errorBox = document.querySelector(".error-message");
+            if (errorBox) {
+              errorBox.textContent = "";
+            }
+
+            const dob = document.getElementById("date_of_birth");
+            if (!dob || !dob.value) return;
+
+            const parts = dob.value.split("-");
+            if (parts.length !== 3) return;
+
+            const yearStr = parts[0];
+            const year = parseInt(yearStr, 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const day = parseInt(parts[2], 10);
+            const inputDate = new Date(year, month, day);
+            const today = new Date();
+
+            let msg = "";
+
+            if (yearStr.length !== 4 || isNaN(year)) {
+              msg = currentLang === "es"
+                ? "Por favor ingresa un año válido de 4 dígitos."
+                : "Please enter a valid 4-digit year.";
+            } else if (inputDate > today) {
+              msg = currentLang === "es"
+                ? "Tu fecha de nacimiento no puede estar en el futuro."
+                : "Your date of birth cannot be in the future.";
+            }
+
+            if (msg) {
+              e.preventDefault();
+              if (errorBox) {
+                errorBox.textContent = msg;
+              } else {
+                alert(msg);
+              }
+              return;
+            }
+          });
+        }
+
+        // Scroll a resultados solo si hay numerología y no hay error
+        if (hasNumerology && !hasFormError) {
+          const servicesSection = document.getElementById("services");
+          if (servicesSection) {
+            servicesSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+
+        // Share buttons (texto + link)
+        const shareWhatsApp = document.getElementById("share-whatsapp");
+        const shareFacebook = document.getElementById("share-facebook");
+
+        function buildShareText() {
+          const dict = translations[currentLang] || translations.en;
+          const servicesTitleEl = document.querySelector("[data-i18n-key='services_title']");
+          const headerText = servicesTitleEl
+            ? servicesTitleEl.textContent.trim()
+            : (dict.page_title || "AURA Numerology Blueprint");
+
+          let text = headerText + "\n\n";
+
+          // Use result blocks (new layout)
+          const blocks = document.querySelectorAll("#services .result-block");
+          blocks.forEach(function (block) {
+            const title = block.querySelector("h3");
+            const essence = block.querySelector(".result-essence");
+            const body = block.querySelector(".result-body");
+
+            if (title) {
+              text += "• " + title.textContent.trim() + "\n";
+            }
+            if (essence) {
+              text += essence.textContent.trim() + "\n";
+            }
+            if (body) {
+              text += body.textContent.trim() + "\n";
+            }
+            text += "\n";
+          });
+
+          const siteUrl = window.location.href.split("#")[0];
+          text += "—\n" + siteUrl;
+
+          return text;
+        }
+
+        if (shareWhatsApp) {
+          shareWhatsApp.addEventListener("click", function () {
+            const text = buildShareText();
+            const url = "https://wa.me/?text=" + encodeURIComponent(text);
+            window.open(url, "_blank");
+          });
+        }
+
+        if (shareFacebook) {
+          shareFacebook.addEventListener("click", function () {
+            const text = buildShareText();
+            const siteUrl = window.location.href.split("#")[0];
+            const url = "https://www.facebook.com/sharer/sharer.php?u=" +
+              encodeURIComponent(siteUrl) +
+              "&quote=" + encodeURIComponent(text);
+            window.open(url, "_blank");
+          });
+        }
+
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+<!--  <meta charset="utf-8">-->
+<!--  <meta content="width=device-width, initial-scale=1.0" name="viewport">-->
+<!--  <title>AURA</title>-->
+<!--  <meta name="description" content="">-->
+<!--  <meta name="keywords" content="">-->
+
+<!--  &lt;!&ndash; Favicons &ndash;&gt;-->
+<!--  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon">-->
+<!--  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">-->
+
+<!--  &lt;!&ndash; Fonts &ndash;&gt;-->
+<!--  <link href="https://fonts.googleapis.com" rel="preconnect">-->
+<!--  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>-->
+<!--  <link-->
+<!--    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"-->
+<!--    rel="stylesheet">-->
+
+<!--  &lt;!&ndash; Vendor CSS Files &ndash;&gt;-->
+<!--  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">-->
+<!--  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">-->
+<!--  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">-->
+<!--  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">-->
+<!--  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">-->
+
+<!--  &lt;!&ndash; Main CSS File &ndash;&gt;-->
+<!--  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">-->
+
+<!--  <style>-->
+<!--    .language-switcher .lang-toggle.active {-->
+<!--      font-weight: 700;-->
+<!--      text-decoration: underline;-->
+<!--    }-->
+
+<!--    .share-buttons .btn-share {-->
+<!--      min-width: 180px;-->
+<!--    }-->
+
+<!--    .service-card {-->
+<!--      height: 100%;-->
+<!--    }-->
+
+<!--    .results-row .service-card {-->
+<!--      display: flex;-->
+<!--      flex-direction: column;-->
+<!--    }-->
+
+<!--    .results-row .service-card p,-->
+<!--    .results-row .service-card .card-text {-->
+<!--      flex-grow: 1;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+
+<!--<body class="index-page">-->
+
+<!--  <header id="header" class="header d-flex align-items-center fixed-top">-->
+<!--    <div-->
+<!--      class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">-->
+
+<!--      <a href="{{ url_for('index') }}" class="logo d-flex align-items-center me-auto me-xl-0">-->
+<!--        <h1 class="sitename mb-0" data-i18n-key="header_title">Discover who you are</h1>-->
+<!--      </a>-->
+
+<!--      <div class="d-flex align-items-center">-->
+<!--        &lt;!&ndash; Language Switcher &ndash;&gt;-->
+<!--        <div class="language-switcher d-flex align-items-center me-3">-->
+<!--          <a href="{{ url_for('index', lang='en') }}"-->
+<!--             class="btn btn-sm btn-outline-light lang-toggle {% if lang == 'en' %}active{% endif %}"-->
+<!--             data-lang="en">-->
+<!--            🇬🇧 EN-->
+<!--          </a>-->
+<!--          <a href="{{ url_for('index', lang='es') }}"-->
+<!--             class="btn btn-sm btn-outline-light ms-2 lang-toggle {% if lang == 'es' %}active{% endif %}"-->
+<!--             data-lang="es">-->
+<!--            🇪🇸 ES-->
+<!--          </a>-->
+<!--        </div>-->
+
+<!--        <a class="btn-getstarted" href="#identity-form" data-i18n-key="header_cta">SHARE</a>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </header>-->
+
+<!--  <main class="main">-->
+
+<!--    &lt;!&ndash; Hero Section &ndash;&gt;-->
+<!--    <section id="hero" class="hero section">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <div class="col-lg-7 content-col" data-aos="fade-up">-->
+<!--            <div class="content">-->
+<!--              <div class="agency-name">-->
+<!--                <h5 data-i18n-key="hero_kicker">Try it and start your</h5>-->
+<!--              </div>-->
+
+<!--              <div class="main-heading">-->
+<!--                <h1 data-i18n-key="hero_title">AURA<br>DISCOVERY</h1>-->
+<!--              </div>-->
+
+<!--              <div class="divider"></div>-->
+
+<!--              <div class="description">-->
+<!--                <p data-i18n-key="hero_description">-->
+<!--                  ✨ Every person arrives in this world carrying a unique vibration — a quiet melody woven into their-->
+<!--                  name, their birth, and the journey they are meant to walk. Here, we invite you to explore that melody-->
+<!--                  through the wisdom of Pythagorean numerology.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-5" data-aos="zoom-out">-->
+<!--            <div class="visual-content">-->
+<!--              <div class="fluid-shape">-->
+<!--                <img src="{{ url_for('static', filename='img/abstract/abstract-1.png') }}" alt="Abstract Fluid Shape"-->
+<!--                  class="fluid-img">-->
+<!--              </div>-->
+
+<!--              <div class="stats-card">-->
+<!--                <div class="stats-number">-->
+<!--                  <h2>5</h2>-->
+<!--                </div>-->
+<!--                <div class="stats-label">-->
+<!--                  <p data-i18n-key="hero_stats_label">Core Numbers</p>-->
+<!--                </div>-->
+<!--                <div class="stats-arrow">-->
+<!--                  <a href="#services"><i class="bi bi-arrow-up-right"></i></a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>&lt;!&ndash; /Hero Section &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Identity Form Section &ndash;&gt;-->
+<!--    <section id="identity-form" class="section light-background">-->
+<!--      <div class="container" data-aos="fade-up" data-aos-delay="100">-->
+<!--        <div class="row justify-content-center">-->
+<!--          <div class="col-lg-8">-->
+<!--            <div class="contact-form-wrapper">-->
+<!--              <h2 class="text-center mb-4" data-i18n-key="form_title">Tell Us About Yourself</h2>-->
+<!--              <p class="text-center mb-4" data-i18n-key="form_subtitle">-->
+<!--                Share a few details and we’ll calculate your 5 core Pythagorean numerology numbers.-->
+<!--              </p>-->
+
+<!--              {% if form_error %}-->
+<!--              <div class="alert alert-warning text-center mb-3">-->
+<!--                {{ form_error }}-->
+<!--              </div>-->
+<!--              {% endif %}-->
+
+<!--              <form action="{{ url_for('who_am_i') }}" method="post" class="php-email-form">-->
+<!--                <div class="row g-3">-->
+
+<!--                  &lt;!&ndash; First Name &ndash;&gt;-->
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="first_name" class="form-label" data-i18n-key="label_first_name">First Name</label>-->
+<!--                      <div class="input-with-icon">-->
+<!--                        <i class="bi bi-person"></i>-->
+<!--                        <input type="text" class="form-control" id="first_name" name="first_name"-->
+<!--                          placeholder="First Name" required>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; Second Name (Optional) &ndash;&gt;-->
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="second_name" class="form-label" data-i18n-key="label_second_name">-->
+<!--                        Second Name <span class="text-muted">(Optional)</span>-->
+<!--                      </label>-->
+<!--                      <div class="input-with-icon">-->
+<!--                        <i class="bi bi-person"></i>-->
+<!--                        <input type="text" class="form-control" id="second_name" name="second_name"-->
+<!--                          placeholder="Second Name">-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; Last Names &ndash;&gt;-->
+<!--                  <div class="col-md-12">-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="last_names" class="form-label" data-i18n-key="label_last_names">Last Names</label>-->
+<!--                      <div class="input-with-icon">-->
+<!--                        <i class="bi bi-person-badge"></i>-->
+<!--                        <input type="text" class="form-control" id="last_names" name="last_names"-->
+<!--                          placeholder="Last Names" required>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; Date of Birth &ndash;&gt;-->
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="date_of_birth" class="form-label" data-i18n-key="label_dob">Date of Birth</label>-->
+<!--                      <div class="input-with-icon">-->
+<!--                        <i class="bi bi-calendar-event"></i>-->
+<!--                        &lt;!&ndash; max="{{ today }}" so it can't be in the future &ndash;&gt;-->
+<!--                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required-->
+<!--                          max="{{ today }}">-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; Country of Birth (Dropdown) &ndash;&gt;-->
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label for="country_of_birth" class="form-label" data-i18n-key="label_country">-->
+<!--                        Country of Birth-->
+<!--                      </label>-->
+<!--                      <div class="input-with-icon">-->
+<!--                        <i class="bi bi-geo-alt"></i>-->
+<!--                        <select class="form-control" id="country_of_birth" name="country_of_birth" required>-->
+<!--                          <option value="" data-i18n-key="country_select_placeholder">Select a country</option>-->
+<!--                          <option value="Afghanistan">Afghanistan</option>-->
+<!--                          <option value="Albania">Albania</option>-->
+<!--                          <option value="Algeria">Algeria</option>-->
+<!--                          <option value="Andorra">Andorra</option>-->
+<!--                          <option value="Angola">Angola</option>-->
+<!--                          <option value="Antigua and Barbuda">Antigua and Barbuda</option>-->
+<!--                          <option value="Argentina">Argentina</option>-->
+<!--                          <option value="Armenia">Armenia</option>-->
+<!--                          <option value="Australia">Australia</option>-->
+<!--                          <option value="Austria">Austria</option>-->
+<!--                          <option value="Azerbaijan">Azerbaijan</option>-->
+<!--                          <option value="Bahamas">Bahamas</option>-->
+<!--                          <option value="Bahrain">Bahrain</option>-->
+<!--                          <option value="Bangladesh">Bangladesh</option>-->
+<!--                          <option value="Barbados">Barbados</option>-->
+<!--                          <option value="Belarus">Belarus</option>-->
+<!--                          <option value="Belgium">Belgium</option>-->
+<!--                          <option value="Belize">Belize</option>-->
+<!--                          <option value="Benin">Benin</option>-->
+<!--                          <option value="Bhutan">Bhutan</option>-->
+<!--                          <option value="Bolivia">Bolivia</option>-->
+<!--                          <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>-->
+<!--                          <option value="Botswana">Botswana</option>-->
+<!--                          <option value="Brazil">Brazil</option>-->
+<!--                          <option value="Brunei">Brunei</option>-->
+<!--                          <option value="Bulgaria">Bulgaria</option>-->
+<!--                          <option value="Burkina Faso">Burkina Faso</option>-->
+<!--                          <option value="Burundi">Burundi</option>-->
+<!--                          <option value="Cabo Verde">Cabo Verde</option>-->
+<!--                          <option value="Cambodia">Cambodia</option>-->
+<!--                          <option value="Cameroon">Cameroon</option>-->
+<!--                          <option value="Canada">Canada</option>-->
+<!--                          <option value="Central African Republic">Central African Republic</option>-->
+<!--                          <option value="Chad">Chad</option>-->
+<!--                          <option value="Chile">Chile</option>-->
+<!--                          <option value="China">China</option>-->
+<!--                          <option value="Colombia">Colombia</option>-->
+<!--                          <option value="Comoros">Comoros</option>-->
+<!--                          <option value="Congo, Democratic Republic of the">Congo, Democratic Republic of the</option>-->
+<!--                          <option value="Congo, Republic of the">Congo, Republic of the</option>-->
+<!--                          <option value="Costa Rica">Costa Rica</option>-->
+<!--                          <option value="Côte d'Ivoire">Côte d'Ivoire</option>-->
+<!--                          <option value="Croatia">Croatia</option>-->
+<!--                          <option value="Cuba">Cuba</option>-->
+<!--                          <option value="Cyprus">Cyprus</option>-->
+<!--                          <option value="Czech Republic">Czech Republic</option>-->
+<!--                          <option value="Denmark">Denmark</option>-->
+<!--                          <option value="Djibouti">Djibouti</option>-->
+<!--                          <option value="Dominica">Dominica</option>-->
+<!--                          <option value="Dominican Republic">Dominican Republic</option>-->
+<!--                          <option value="Ecuador">Ecuador</option>-->
+<!--                          <option value="Egypt">Egypt</option>-->
+<!--                          <option value="El Salvador">El Salvador</option>-->
+<!--                          <option value="Equatorial Guinea">Equatorial Guinea</option>-->
+<!--                          <option value="Eritrea">Eritrea</option>-->
+<!--                          <option value="Estonia">Estonia</option>-->
+<!--                          <option value="Eswatini">Eswatini</option>-->
+<!--                          <option value="Ethiopia">Ethiopia</option>-->
+<!--                          <option value="Fiji">Fiji</option>-->
+<!--                          <option value="Finland">Finland</option>-->
+<!--                          <option value="France">France</option>-->
+<!--                          <option value="Gabon">Gabon</option>-->
+<!--                          <option value="Gambia">Gambia</option>-->
+<!--                          <option value="Georgia">Georgia</option>-->
+<!--                          <option value="Germany">Germany</option>-->
+<!--                          <option value="Ghana">Ghana</option>-->
+<!--                          <option value="Greece">Greece</option>-->
+<!--                          <option value="Grenada">Grenada</option>-->
+<!--                          <option value="Guatemala">Guatemala</option>-->
+<!--                          <option value="Guinea">Guinea</option>-->
+<!--                          <option value="Guinea-Bissau">Guinea-Bissau</option>-->
+<!--                          <option value="Guyana">Guyana</option>-->
+<!--                          <option value="Haiti">Haiti</option>-->
+<!--                          <option value="Honduras">Honduras</option>-->
+<!--                          <option value="Hungary">Hungary</option>-->
+<!--                          <option value="Iceland">Iceland</option>-->
+<!--                          <option value="India">India</option>-->
+<!--                          <option value="Indonesia">Indonesia</option>-->
+<!--                          <option value="Iran">Iran</option>-->
+<!--                          <option value="Iraq">Iraq</option>-->
+<!--                          <option value="Ireland">Ireland</option>-->
+<!--                          <option value="Israel">Israel</option>-->
+<!--                          <option value="Italy">Italy</option>-->
+<!--                          <option value="Jamaica">Jamaica</option>-->
+<!--                          <option value="Japan">Japan</option>-->
+<!--                          <option value="Jordan">Jordan</option>-->
+<!--                          <option value="Kazakhstan">Kazakhstan</option>-->
+<!--                          <option value="Kenya">Kenya</option>-->
+<!--                          <option value="Kiribati">Kiribati</option>-->
+<!--                          <option value="Kuwait">Kuwait</option>-->
+<!--                          <option value="Kyrgyzstan">Kyrgyzstan</option>-->
+<!--                          <option value="Laos">Laos</option>-->
+<!--                          <option value="Latvia">Latvia</option>-->
+<!--                          <option value="Lebanon">Lebanon</option>-->
+<!--                          <option value="Lesotho">Lesotho</option>-->
+<!--                          <option value="Liberia">Liberia</option>-->
+<!--                          <option value="Libya">Libya</option>-->
+<!--                          <option value="Liechtenstein">Liechtenstein</option>-->
+<!--                          <option value="Lithuania">Lithuania</option>-->
+<!--                          <option value="Luxembourg">Luxembourg</option>-->
+<!--                          <option value="Madagascar">Madagascar</option>-->
+<!--                          <option value="Malawi">Malawi</option>-->
+<!--                          <option value="Malaysia">Malaysia</option>-->
+<!--                          <option value="Maldives">Maldives</option>-->
+<!--                          <option value="Mali">Mali</option>-->
+<!--                          <option value="Malta">Malta</option>-->
+<!--                          <option value="Marshall Islands">Marshall Islands</option>-->
+<!--                          <option value="Mauritania">Mauritania</option>-->
+<!--                          <option value="Mauritius">Mauritius</option>-->
+<!--                          <option value="Mexico">Mexico</option>-->
+<!--                          <option value="Micronesia">Micronesia</option>-->
+<!--                          <option value="Moldova">Moldova</option>-->
+<!--                          <option value="Monaco">Monaco</option>-->
+<!--                          <option value="Mongolia">Mongolia</option>-->
+<!--                          <option value="Montenegro">Montenegro</option>-->
+<!--                          <option value="Morocco">Morocco</option>-->
+<!--                          <option value="Mozambique">Mozambique</option>-->
+<!--                          <option value="Myanmar">Myanmar</option>-->
+<!--                          <option value="Namibia">Namibia</option>-->
+<!--                          <option value="Nauru">Nauru</option>-->
+<!--                          <option value="Nepal">Nepal</option>-->
+<!--                          <option value="Netherlands">Netherlands</option>-->
+<!--                          <option value="New Zealand">New Zealand</option>-->
+<!--                          <option value="Nicaragua">Nicaragua</option>-->
+<!--                          <option value="Niger">Niger</option>-->
+<!--                          <option value="Nigeria">Nigeria</option>-->
+<!--                          <option value="North Korea">North Korea</option>-->
+<!--                          <option value="North Macedonia">North Macedonia</option>-->
+<!--                          <option value="Norway">Norway</option>-->
+<!--                          <option value="Oman">Oman</option>-->
+<!--                          <option value="Pakistan">Pakistan</option>-->
+<!--                          <option value="Palau">Palau</option>-->
+<!--                          <option value="Panama">Panama</option>-->
+<!--                          <option value="Papua New Guinea">Papua New Guinea</option>-->
+<!--                          <option value="Paraguay">Paraguay</option>-->
+<!--                          <option value="Peru">Peru</option>-->
+<!--                          <option value="Philippines">Philippines</option>-->
+<!--                          <option value="Poland">Poland</option>-->
+<!--                          <option value="Portugal">Portugal</option>-->
+<!--                          <option value="Qatar">Qatar</option>-->
+<!--                          <option value="Romania">Romania</option>-->
+<!--                          <option value="Russia">Russia</option>-->
+<!--                          <option value="Rwanda">Rwanda</option>-->
+<!--                          <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>-->
+<!--                          <option value="Saint Lucia">Saint Lucia</option>-->
+<!--                          <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>-->
+<!--                          <option value="Samoa">Samoa</option>-->
+<!--                          <option value="San Marino">San Marino</option>-->
+<!--                          <option value="Sao Tome and Principe">Sao Tome and Principe</option>-->
+<!--                          <option value="Saudi Arabia">Saudi Arabia</option>-->
+<!--                          <option value="Senegal">Senegal</option>-->
+<!--                          <option value="Serbia">Serbia</option>-->
+<!--                          <option value="Seychelles">Seychelles</option>-->
+<!--                          <option value="Sierra Leone">Sierra Leone</option>-->
+<!--                          <option value="Singapore">Singapore</option>-->
+<!--                          <option value="Slovakia">Slovakia</option>-->
+<!--                          <option value="Slovenia">Slovenia</option>-->
+<!--                          <option value="Solomon Islands">Solomon Islands</option>-->
+<!--                          <option value="Somalia">Somalia</option>-->
+<!--                          <option value="South Africa">South Africa</option>-->
+<!--                          <option value="South Korea">South Korea</option>-->
+<!--                          <option value="South Sudan">South Sudan</option>-->
+<!--                          <option value="Spain">Spain</option>-->
+<!--                          <option value="Sri Lanka">Sri Lanka</option>-->
+<!--                          <option value="Sudan">Sudan</option>-->
+<!--                          <option value="Suriname">Suriname</option>-->
+<!--                          <option value="Sweden">Sweden</option>-->
+<!--                          <option value="Switzerland">Switzerland</option>-->
+<!--                          <option value="Syria">Syria</option>-->
+<!--                          <option value="Taiwan">Taiwan</option>-->
+<!--                          <option value="Tajikistan">Tajikistan</option>-->
+<!--                          <option value="Tanzania">Tanzania</option>-->
+<!--                          <option value="Thailand">Thailand</option>-->
+<!--                          <option value="Timor-Leste">Timor-Leste</option>-->
+<!--                          <option value="Togo">Togo</option>-->
+<!--                          <option value="Tonga">Tonga</option>-->
+<!--                          <option value="Trinidad and Tobago">Trinidad and Tobago</option>-->
+<!--                          <option value="Tunisia">Tunisia</option>-->
+<!--                          <option value="Turkey">Turkey</option>-->
+<!--                          <option value="Turkmenistan">Turkmenistan</option>-->
+<!--                          <option value="Tuvalu">Tuvalu</option>-->
+<!--                          <option value="Uganda">Uganda</option>-->
+<!--                          <option value="Ukraine">Ukraine</option>-->
+<!--                          <option value="United Arab Emirates">United Arab Emirates</option>-->
+<!--                          <option value="United Kingdom">United Kingdom</option>-->
+<!--                          <option value="United States">United States</option>-->
+<!--                          <option value="Uruguay">Uruguay</option>-->
+<!--                          <option value="Uzbekistan">Uzbekistan</option>-->
+<!--                          <option value="Vanuatu">Vanuatu</option>-->
+<!--                          <option value="Venezuela">Venezuela</option>-->
+<!--                          <option value="Vietnam">Vietnam</option>-->
+<!--                          <option value="Yemen">Yemen</option>-->
+<!--                          <option value="Zambia">Zambia</option>-->
+<!--                          <option value="Zimbabwe">Zimbabwe</option>-->
+<!--                        </select>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; Loader / Messages &ndash;&gt;-->
+<!--                  <div class="col-12">-->
+<!--                    <div class="loading d-none">Loading</div>-->
+<!--                    <div class="error-message text-center text-danger small"></div>-->
+<!--                    <div class="sent-message d-none">Your data has been sent. Thank you!</div>-->
+<!--                  </div>-->
+
+<!--                  &lt;!&ndash; CTA Button &ndash;&gt;-->
+<!--                  <div class="col-12 text-center mt-2">-->
+<!--                    <button type="submit" class="btn btn-primary btn-submit" data-i18n-key="btn_who_am_i">-->
+<!--                      Who Am I-->
+<!--                    </button>-->
+<!--                  </div>-->
+
+<!--                </div>-->
+<!--              </form>-->
+
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; /Identity Form Section &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Services Section &ndash;&gt;-->
+<!--    <section id="services" class="services section">-->
+
+<!--      &lt;!&ndash; Section Title &ndash;&gt;-->
+<!--      <div class="container section-title" data-aos="fade-up">-->
+<!--        <h2 data-i18n-key="services_title">Your Core Numbers</h2>-->
+<!--        <div>-->
+<!--          <span data-i18n-key="services_subtitle_1">Discover Your</span>-->
+<!--          <span class="description-title" data-i18n-key="services_subtitle_2">Pythagorean Blueprint</span>-->
+<!--        </div>-->
+<!--      </div>&lt;!&ndash; End Section Title &ndash;&gt;-->
+
+<!--      <div class="container" data-aos="fade-up" data-aos-delay="100">-->
+
+<!--        <div class="service-header">-->
+<!--          <div class="row align-items-center">-->
+<!--            <div class="col-lg-8 col-md-12">-->
+<!--              <div class="service-intro">-->
+<!--                <h2 class="service-heading">-->
+<!--                  <div data-i18n-key="services_heading_line1">Your 5 Central Numbers</div>-->
+<!--                  <div>-->
+<!--                    <span data-i18n-key="services_heading_line2">decoded from your name and birth</span>-->
+<!--                  </div>-->
+<!--                </h2>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-4 col-md-12">-->
+<!--              <div class="service-summary">-->
+<!--                {% if numerology %}-->
+<!--                <p data-i18n-key="services_intro_with_data">-->
+<!--                  These interpretations are uniquely calculated from your full name and date of birth.-->
+<!--                  Each number reveals a different layer of your essence, purpose and way of being in the world.-->
+<!--                </p>-->
+<!--                {% else %}-->
+<!--                <p data-i18n-key="services_intro_no_data">-->
+<!--                  Once you complete the form above, this section will reveal your 5 central Pythagorean numbers,-->
+<!--                  with deep, personalized interpretations of your path and inner nature.-->
+<!--                </p>-->
+<!--                {% endif %}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        {% if numerology %}-->
+<!--        &lt;!&ndash; ========== RESULT CARDS ========== &ndash;&gt;-->
+<!--        <div class="row justify-content-center results-row">-->
+
+<!--          &lt;!&ndash; First row: 3 cards &ndash;&gt;-->
+
+<!--          &lt;!&ndash; CAMINO DE VIDA &ndash;&gt;-->
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-compass"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  {% if numerology.life_path.title %}-->
+<!--                    {{ numerology.life_path.title }}-->
+<!--                  {% else %}-->
+<!--                    {{ numerology.life_path.label }} <span>{{ numerology.life_path.number }}</span>-->
+<!--                  {% endif %}-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <div class="card-text">-->
+<!--                {{ numerology.life_path.expanded|safe }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          &lt;!&ndash; DÍA DE NACIMIENTO &ndash;&gt;-->
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="200">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-sunrise"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  {% if numerology.birthday.title %}-->
+<!--                    {{ numerology.birthday.title }}-->
+<!--                  {% else %}-->
+<!--                    <span data-i18n-key="card_birthday_title">-->
+<!--                      Birth Day Gift-->
+<!--                    </span>-->
+<!--                    <span>{{ numerology.birthday.number }}</span>-->
+<!--                  {% endif %}-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <div class="card-text">-->
+<!--                {{ numerology.birthday.expanded|safe }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          &lt;!&ndash; EXPRESIÓN / DESTINO &ndash;&gt;-->
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="300">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-megaphone"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  {% if numerology.expression.title %}-->
+<!--                    {{ numerology.expression.title }}-->
+<!--                  {% else %}-->
+<!--                    <span data-i18n-key="card_expression_title">-->
+<!--                      Expression / Destiny-->
+<!--                    </span>-->
+<!--                    <span>{{ numerology.expression.number }}</span>-->
+<!--                  {% endif %}-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <div class="card-text">-->
+<!--                {{ numerology.expression.expanded|safe }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          &lt;!&ndash; Second row: 2 centered cards &ndash;&gt;-->
+
+<!--          <div class="w-100 d-none d-lg-block"></div>-->
+
+<!--          &lt;!&ndash; DESEO DEL ALMA &ndash;&gt;-->
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-heart"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  {% if numerology.soul_urge.title %}-->
+<!--                    {{ numerology.soul_urge.title }}-->
+<!--                  {% else %}-->
+<!--                    <span data-i18n-key="card_soul_title">-->
+<!--                      Soul Urge-->
+<!--                    </span>-->
+<!--                    <span>{{ numerology.soul_urge.number }}</span>-->
+<!--                  {% endif %}-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <div class="card-text">-->
+<!--                {{ numerology.soul_urge.expanded|safe }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          &lt;!&ndash; PERSONALIDAD &ndash;&gt;-->
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="200">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-eye"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  {% if numerology.personality.title %}-->
+<!--                    {{ numerology.personality.title }}-->
+<!--                  {% else %}-->
+<!--                    <span data-i18n-key="card_personality_title">-->
+<!--                      Personality-->
+<!--                    </span>-->
+<!--                    <span>{{ numerology.personality.number }}</span>-->
+<!--                  {% endif %}-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <div class="card-text">-->
+<!--                {{ numerology.personality.expanded|safe }}-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          &lt;!&ndash; Full width special numbers card &ndash;&gt;-->
+<!--          <div class="col-12 mt-4 aos-init" data-aos="fade-up" data-aos-delay="300">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-stars"></i>-->
+<!--              </div>-->
+<!--              <a href="#services" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#services">-->
+<!--                  <span data-i18n-key="card_special_badge">-->
+<!--                    Special <span>Numbers</span>-->
+<!--                  </span>-->
+<!--                </a>-->
+<!--              </h3>-->
+
+<!--              {% if numerology.special_numbers and numerology.special_numbers|length > 0 %}-->
+<!--              <p>-->
+<!--                <span data-i18n-key="card_special_intro">-->
+<!--                  In your core chart we found the following special vibrations:-->
+<!--                </span>-->
+<!--                <strong>{{ numerology.special_numbers | join(", ") }}</strong>.-->
+<!--                <span data-i18n-key="card_special_intro_2">-->
+<!--                  These numbers indicate intensified lessons, gifts or karmic themes.-->
+<!--                </span>-->
+<!--              </p>-->
+
+<!--              {% if numerology.master_details and numerology.master_details|length > 0 %}-->
+<!--              {% for master in numerology.master_details %}-->
+<!--              <p>-->
+<!--                <strong>{{ master.number }} — {{ master.data.title }}</strong><br>-->
+<!--                {{ master.data.essence }}<br>-->
+<!--                {{ master.data.expanded|safe }}-->
+<!--              </p>-->
+<!--              {% endfor %}-->
+<!--              {% endif %}-->
+
+<!--              {% if numerology.karmic_details and numerology.karmic_details|length > 0 %}-->
+<!--              <p data-i18n-key="card_karmic_title"><strong>Karmic Numbers Detected</strong></p>-->
+<!--              <ul>-->
+<!--                {% for karmic in numerology.karmic_details %}-->
+<!--                <li><strong>{{ karmic.number }}</strong> — {{ karmic.description }}</li>-->
+<!--                {% endfor %}-->
+<!--              </ul>-->
+<!--              {% endif %}-->
+
+<!--              {% else %}-->
+<!--              <p data-i18n-key="card_special_no_data">-->
+<!--                Your main numbers are expressed in their standard form (1–9), without master or karmic intensifiers.-->
+<!--                This is not “better or worse”, it simply indicates a more linear, direct path of learning.-->
+<!--              </p>-->
+<!--              {% endif %}-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>&lt;!&ndash; End row results &ndash;&gt;-->
+
+<!--        &lt;!&ndash; Share buttons centered, outside card, sharing all results &ndash;&gt;-->
+<!--        <div class="row mt-4">-->
+<!--          <div class="col-12 text-center share-buttons">-->
+<!--            <button id="share-whatsapp" type="button"-->
+<!--              class="btn btn-success btn-share mx-2 mb-2" data-i18n-key="share_whatsapp">-->
+<!--              Share on WhatsApp-->
+<!--            </button>-->
+<!--            <button id="share-facebook" type="button"-->
+<!--              class="btn btn-primary btn-share mx-2 mb-2" data-i18n-key="share_facebook">-->
+<!--              Share on Facebook-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        {% else %}-->
+<!--        &lt;!&ndash; ========== PLACEHOLDER CARDS (ANTES DEL CÁLCULO) ========== &ndash;&gt;-->
+<!--        <div class="row justify-content-center results-row">-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-compass"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_life_path_title">-->
+<!--                  Life Path <span>Number</span>-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_life_path_text">-->
+<!--                Your main life mission or path. It reveals the core of your personality, your innate talents and the-->
+<!--                major lessons you came to learn. It is the most influential number.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="200">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-sunrise"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_birthday_title">-->
+<!--                  Birthday <span>Number</span>-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_birthday_text">-->
+<!--                A specific talent or trait that has been with you since birth. It supports and reinforces your Life Path.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="300">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-megaphone"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_expression_title">-->
+<!--                  Expression <span>/ Destiny</span>-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_expression_text">-->
+<!--                Your potential and abilities. It represents what you came here to do with your life and highlights-->
+<!--                your tools, talents and ideal career directions.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="100">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-heart"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_soul_title">-->
+<!--                  Soul <span>Urge</span>-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_soul_text">-->
+<!--                Your inner desires, motivations and impulses. It shows what makes you feel most fulfilled and what you-->
+<!--                truly long for deep inside.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="200">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-eye"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_personality_title">-->
+<!--                  Personality-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_personality_text">-->
+<!--                The first impression you give to others. It is the social mask or outer image you project to the world.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-lg-4 col-md-6 aos-init" data-aos="fade-up" data-aos-delay="300">-->
+<!--            <div class="service-card position-relative z-1">-->
+<!--              <div class="service-icon">-->
+<!--                <i class="bi bi-stars"></i>-->
+<!--              </div>-->
+<!--              <a href="#identity-form" class="card-action d-flex align-items-center justify-content-center rounded-circle">-->
+<!--                <i class="bi bi-arrow-up-right"></i>-->
+<!--              </a>-->
+<!--              <h3>-->
+<!--                <a href="#identity-form" data-i18n-key="ph_special_title">-->
+<!--                  Special <span>Numbers</span>-->
+<!--                </a>-->
+<!--              </h3>-->
+<!--              <p data-i18n-key="ph_special_text">-->
+<!--                If any of your core numbers is a Master or Karmic Number, this card will highlight it and expand on its-->
+<!--                deeper meaning in your journey.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--        {% endif %}-->
+
+<!--      </div>-->
+
+<!--    </section>&lt;!&ndash; /Services Section &ndash;&gt;-->
+
+<!--    &lt;!&ndash; Call To Action Section &ndash;&gt;-->
+<!--    <section id="call-to-action" class="call-to-action section">-->
+
+<!--      <div class="container" data-aos="fade-up" data-aos-delay="100">-->
+
+<!--        <div class="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">-->
+
+<!--          <div class="content-left flex-grow-1" data-aos="fade-right" data-aos-delay="200">-->
+<!--            <span class="badge text-uppercase mb-2" data-i18n-key="cta_badge">Reflection</span>-->
+<!--            <h2 data-i18n-key="cta_title">Let your numbers start a conversation with you</h2>-->
+<!--            <p class="my-4" data-i18n-key="cta_text">-->
+<!--              This tool is not about predicting fate. It offers a symbolic mirror so you can explore patterns, choices-->
+<!--              and possibilities with more awareness.-->
+<!--            </p>-->
+
+<!--            <div class="features d-flex flex-wrap gap-3 mb-4">-->
+<!--              <div class="feature-item">-->
+<!--                <i class="bi bi-check-circle-fill"></i>-->
+<!--                <span data-i18n-key="cta_feature_1">Gentle self-knowledge</span>-->
+<!--              </div>-->
+<!--              <div class="feature-item">-->
+<!--                <i class="bi bi-check-circle-fill"></i>-->
+<!--                <span data-i18n-key="cta_feature_2">Symbolic insights</span>-->
+<!--              </div>-->
+<!--              <div class="feature-item">-->
+<!--                <i class="bi bi-check-circle-fill"></i>-->
+<!--                <span data-i18n-key="cta_feature_3">Personal reflection</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="content-right position-relative" data-aos="fade-left" data-aos-delay="300">-->
+<!--            <img src="{{ url_for('static', filename='img/misc/misc-1.webp') }}" alt="Digital Platform"-->
+<!--              class="img-fluid rounded-4">-->
+<!--            <div class="floating-card">-->
+<!--              <div class="card-icon">-->
+<!--                <i class="bi bi-graph-up-arrow"></i>-->
+<!--              </div>-->
+<!--              <div class="card-content">-->
+<!--                <span class="stats-number">5</span>-->
+<!--                <span class="stats-text" data-i18n-key="cta_stats_text">Central Numbers</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="decoration">-->
+<!--            <div class="circle-1"></div>-->
+<!--            <div class="circle-2"></div>-->
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--      </div>-->
+
+<!--    </section>&lt;!&ndash; /Call To Action Section &ndash;&gt;-->
+
+<!--  </main>-->
+
+<!--  <footer id="footer" class="footer">-->
+
+<!--    <div class="container footer-top">-->
+<!--      <div class="row gy-4">-->
+<!--        <div class="col-lg-5 col-md-12 footer-about">-->
+<!--          <a href="{{ url_for('index') }}" class="logo d-flex align-items-center">-->
+<!--            <span class="sitename">AURA</span>-->
+<!--          </a>-->
+<!--          <p data-i18n-key="footer_about">-->
+<!--            Numerology here is used as a symbolic map — a playful, reflective lens to explore who you are, not as fixed-->
+<!--            destiny.-->
+<!--          </p>-->
+<!--          <div class="social-links d-flex mt-4">-->
+<!--            <a href="#"><i class="bi bi-twitter-x"></i></a>-->
+<!--            <a href="#"><i class="bi bi-facebook"></i></a>-->
+<!--            <a href="#"><i class="bi bi-instagram"></i></a>-->
+<!--            <a href="#"><i class="bi bi-linkedin"></i></a>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-2 col-6 footer-links">-->
+<!--          <h4 data-i18n-key="footer_links_title">Useful Links</h4>-->
+<!--          <ul>-->
+<!--            <li><a href="#hero" data-i18n-key="footer_link_home">Home</a></li>-->
+<!--            <li><a href="#identity-form" data-i18n-key="footer_link_form">Form</a></li>-->
+<!--            <li><a href="#services" data-i18n-key="footer_link_core">Core Numbers</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-2 col-6 footer-links">-->
+<!--          <h4 data-i18n-key="footer_explore_title">Explore</h4>-->
+<!--          <ul>-->
+<!--            <li><a href="#services" data-i18n-key="footer_explore_life">Life Path</a></li>-->
+<!--            <li><a href="#services" data-i18n-key="footer_explore_soul">Soul Urge</a></li>-->
+<!--            <li><a href="#services" data-i18n-key="footer_explore_personality">Personality</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+
+<!--        <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">-->
+<!--          <h4 data-i18n-key="footer_disclaimer_title">Disclaimer</h4>-->
+<!--          <p data-i18n-key="footer_disclaimer_text">-->
+<!--            This experience is for reflection and self-knowledge only and does not replace professional, medical or-->
+<!--            psychological advice.-->
+<!--          </p>-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="container copyright text-center mt-4">-->
+<!--      <p>-->
+<!--        © <span>Copyright</span> <strong class="px-1 sitename">AURA</strong> <span data-i18n-key="footer_rights">All-->
+<!--          Rights Reserved</span>-->
+<!--      </p>-->
+<!--      <div class="credits">-->
+<!--        Template base by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </footer>-->
+
+<!--  &lt;!&ndash; Scroll Top &ndash;&gt;-->
+<!--  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i-->
+<!--      class="bi bi-arrow-up-short"></i></a>-->
+
+<!--  &lt;!&ndash; Preloader &ndash;&gt;-->
+<!--  <div id="preloader"></div>-->
+
+<!--  &lt;!&ndash; Vendor JS Files &ndash;&gt;-->
+<!--  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>-->
+<!--  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>-->
+<!--  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>-->
+<!--  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>-->
+<!--  <script src="{{ url_for('static', filename='vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>-->
+<!--  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>-->
+
+<!--  &lt;!&ndash; Main JS File &ndash;&gt;-->
+<!--  <script src="{{ url_for('static', filename='js/main.js') }}"></script>-->
+
+<!--  &lt;!&ndash; Custom i18n, validation, share & scroll logic &ndash;&gt;-->
+<!--  <script>-->
+<!--    (function () {-->
+<!--      const translations = {-->
+<!--        en: {-->
+<!--          page_title: "AURA — Numerology Blueprint",-->
+<!--          header_title: "Discover who you are",-->
+<!--          header_cta: "SHARE",-->
+<!--          hero_kicker: "Try it and start your",-->
+<!--          hero_title: "AURA<br>DISCOVERY",-->
+<!--          hero_description: "✨ Every person arrives in this world carrying a unique vibration — a quiet melody woven into their name, their birth, and the journey they are meant to walk. Here, we invite you to explore that melody through the wisdom of Pythagorean numerology.",-->
+<!--          hero_stats_label: "Core Numbers",-->
+
+<!--          form_title: "Tell Us About Yourself",-->
+<!--          form_subtitle: "Share a few details and we’ll calculate your 5 core Pythagorean numerology numbers.",-->
+<!--          label_first_name: "First Name",-->
+<!--          label_second_name: "Second Name <span class=\"text-muted\">(Optional)</span>",-->
+<!--          label_last_names: "Last Names",-->
+<!--          label_dob: "Date of Birth",-->
+<!--          label_country: "Country of Birth",-->
+<!--          country_select_placeholder: "Select a country",-->
+<!--          btn_who_am_i: "Who Am I",-->
+
+<!--          services_title: "Your Core Numbers",-->
+<!--          services_subtitle_1: "Discover Your",-->
+<!--          services_subtitle_2: "Pythagorean Blueprint",-->
+<!--          services_heading_line1: "Your 5 Central Numbers",-->
+<!--          services_heading_line2: "decoded from your name and birth",-->
+<!--          services_intro_with_data: "These interpretations are uniquely calculated from your full name and date of birth. Each number reveals a different layer of your essence, purpose and way of being in the world.",-->
+<!--          services_intro_no_data: "Once you complete the form above, this section will reveal your 5 central Pythagorean numbers, with deep, personalized interpretations of your path and inner nature.",-->
+
+<!--          card_birthday_title: "Birth Day Gift",-->
+<!--          card_expression_title: "Expression / Destiny",-->
+<!--          card_soul_title: "Soul Urge",-->
+<!--          card_personality_title: "Personality",-->
+<!--          card_special_badge: "Special Numbers",-->
+<!--          card_special_title_with: "Master &amp; Karmic Numbers Present",-->
+<!--          card_special_intro: "In your core chart we found the following special vibrations:",-->
+<!--          card_special_intro_2: "These numbers indicate intensified lessons, gifts or karmic themes.",-->
+<!--          card_karmic_title: "Karmic Numbers Detected",-->
+<!--          card_special_title_without: "No Master or Karmic Numbers Detected",-->
+<!--          card_special_no_data: "Your main numbers are expressed in their standard form (1–9), without master or karmic intensifiers. This is not “better or worse”, it simply indicates a more linear, direct path of learning.",-->
+
+<!--          /* Updated placeholders with your descriptions */-->
+<!--          ph_life_path_title: "Life Path Number",-->
+<!--          ph_life_path_text: "Your main life mission or path. It reveals the core of your personality, your innate talents and the major lessons you came to learn. It is the most influential number.",-->
+<!--          ph_birthday_title: "Birthday Number",-->
+<!--          ph_birthday_text: "A specific talent or trait that has been with you since birth. It acts as a supporting quality that reinforces your Life Path.",-->
+<!--          ph_expression_title: "Expression / Destiny",-->
+<!--          ph_expression_text: "Your potential and abilities. It represents what you came here to do with your life, highlighting your tools, talents and ideal directions or careers.",-->
+<!--          ph_soul_title: "Soul Urge",-->
+<!--          ph_soul_text: "Your inner desires, motivations and impulses. It points to what makes you feel most fulfilled and what you truly long for deep inside.",-->
+<!--          ph_personality_title: "Personality",-->
+<!--          ph_personality_text: "The first impression you give to others. It is the social mask or outer image you project to the world.",-->
+<!--          ph_special_title: "Special Numbers",-->
+<!--          ph_special_text: "If any of your core numbers is a Master or Karmic Number, this card will highlight it and expand on its deeper meaning in your journey.",-->
+
+<!--          cta_badge: "Reflection",-->
+<!--          cta_title: "Let your numbers start a conversation with you",-->
+<!--          cta_text: "This tool is not about predicting fate. It offers a symbolic mirror so you can explore patterns, choices and possibilities with more awareness.",-->
+<!--          cta_feature_1: "Gentle self-knowledge",-->
+<!--          cta_feature_2: "Symbolic insights",-->
+<!--          cta_feature_3: "Personal reflection",-->
+<!--          cta_stats_text: "Central Numbers",-->
+
+<!--          footer_about: "Numerology here is used as a symbolic map — a playful, reflective lens to explore who you are, not as fixed destiny.",-->
+<!--          footer_links_title: "Useful Links",-->
+<!--          footer_link_home: "Home",-->
+<!--          footer_link_form: "Form",-->
+<!--          footer_link_core: "Core Numbers",-->
+<!--          footer_explore_title: "Explore",-->
+<!--          footer_explore_life: "Life Path",-->
+<!--          footer_explore_soul: "Soul Urge",-->
+<!--          footer_explore_personality: "Personality",-->
+<!--          footer_disclaimer_title: "Disclaimer",-->
+<!--          footer_disclaimer_text: "This experience is for reflection and self-knowledge only and does not replace professional, medical or psychological advice.",-->
+<!--          footer_rights: "All Rights Reserved",-->
+
+<!--          share_whatsapp: "Share on WhatsApp",-->
+<!--          share_facebook: "Share on Facebook"-->
+<!--        },-->
+<!--        es: {-->
+<!--          page_title: "AURA — Mapa Numerológico",-->
+<!--          header_title: "Descubre quién eres",-->
+<!--          header_cta: "COMPARTIR",-->
+<!--          hero_kicker: "Inténtalo y comienza tu",-->
+<!--          hero_title: "AURA<br>DISCOVERY",-->
+<!--          hero_description: "✨ Cada persona llega a este mundo con una vibración única: una melodía silenciosa tejida en su nombre, su nacimiento y el camino que vino a recorrer. Aquí te invitamos a explorar esa melodía a través de la sabiduría de la numerología pitagórica.",-->
+<!--          hero_stats_label: "Números centrales",-->
+
+<!--          form_title: "Cuéntanos sobre ti",-->
+<!--          form_subtitle: "Comparte algunos datos y calcularemos tus 5 números pitagóricos centrales.",-->
+<!--          label_first_name: "Primer nombre",-->
+<!--          label_second_name: "Segundo nombre <span class=\"text-muted\">(opcional)</span>",-->
+<!--          label_last_names: "Apellidos",-->
+<!--          label_dob: "Fecha de nacimiento",-->
+<!--          label_country: "País de nacimiento",-->
+<!--          country_select_placeholder: "Selecciona un país",-->
+<!--          btn_who_am_i: "¿Quién soy?",-->
+
+<!--          services_title: "Tus números centrales",-->
+<!--          services_subtitle_1: "Descubre tu",-->
+<!--          services_subtitle_2: "Mapa Pitagórico",-->
+<!--          services_heading_line1: "Tus 5 números centrales",-->
+<!--          services_heading_line2: "calculados desde tu nombre y fecha de nacimiento",-->
+<!--          services_intro_with_data: "Estas interpretaciones se calculan a partir de tu nombre completo y tu fecha de nacimiento. Cada número revela una capa distinta de tu esencia, propósito y forma de estar en el mundo.",-->
+<!--          services_intro_no_data: "Cuando completes el formulario de arriba, esta sección mostrará tus 5 números pitagóricos centrales, con interpretaciones profundas y personalizadas de tu camino y tu naturaleza interior.",-->
+
+<!--          card_birthday_title: "Regalo de tu día de nacimiento",-->
+<!--          card_expression_title: "Número de Expresión / Destino",-->
+<!--          card_soul_title: "Número del Alma",-->
+<!--          card_personality_title: "Número de Personalidad",-->
+<!--          card_special_badge: "Números especiales",-->
+<!--          card_special_title_with: "Números Maestros y Kármicos presentes",-->
+<!--          card_special_intro: "En tu mapa central encontramos las siguientes vibraciones especiales:",-->
+<!--          card_special_intro_2: "Estos números indican lecciones, dones o temas kármicos intensificados.",-->
+<!--          card_karmic_title: "Números Kármicos detectados",-->
+<!--          card_special_title_without: "No se detectaron Números Maestros o Kármicos",-->
+<!--          card_special_no_data: "Tus números principales se expresan en su forma estándar (1–9), sin intensificadores maestros ni kármicos. Esto no es “mejor ni peor”, solo indica un camino de aprendizaje más lineal y directo.",-->
+
+<!--          /* Placeholders with your Spanish wording */-->
+<!--          ph_life_path_title: "Camino de Vida",-->
+<!--          ph_life_path_text: "La misión principal o el camino de la vida. Revela la esencia de tu personalidad, tus talentos innatos y las grandes lecciones que viniste a aprender. Es el número más influyente.",-->
+<!--          ph_birthday_title: "Día de Nacimiento",-->
+<!--          ph_birthday_text: "Un talento o rasgo específico que te acompaña desde el nacimiento. Actúa como un rasgo de apoyo a tu Camino de Vida.",-->
+<!--          ph_expression_title: "Número de Expresión / Destino",-->
+<!--          ph_expression_text: "Tu potencial y tus habilidades. Representa lo que viniste a hacer con tu vida y muestra tus herramientas, talentos y los caminos profesionales más afines a ti.",-->
+<!--          ph_soul_title: "Deseo del Alma",-->
+<!--          ph_soul_text: "Tus deseos, motivaciones e impulsos internos. Es lo que te hace sentir más realizado y lo que realmente quieres en lo profundo.",-->
+<!--          ph_personality_title: "Número de Personalidad",-->
+<!--          ph_personality_text: "La primera impresión que das a los demás. Es la máscara social o la apariencia externa que proyectas al mundo.",-->
+<!--          ph_special_title: "Números especiales",-->
+<!--          ph_special_text: "Si alguno de tus números centrales es Maestro o Kármico, esta tarjeta lo resaltará y ampliará su significado más profundo en tu viaje.",-->
+
+<!--          cta_badge: "Reflexión",-->
+<!--          cta_title: "Deja que tus números inicien una conversación contigo",-->
+<!--          cta_text: "Esta herramienta no pretende predecir tu destino. Es un espejo simbólico para explorar patrones, decisiones y posibilidades con más consciencia.",-->
+<!--          cta_feature_1: "Autoconocimiento suave",-->
+<!--          cta_feature_2: "Insight simbólico",-->
+<!--          cta_feature_3: "Reflexión personal",-->
+<!--          cta_stats_text: "Números centrales",-->
+
+<!--          footer_about: "Aquí usamos la numerología como un mapa simbólico: una lente lúdica y reflexiva para explorar quién eres, no como un destino fijo.",-->
+<!--          footer_links_title: "Enlaces útiles",-->
+<!--          footer_link_home: "Inicio",-->
+<!--          footer_link_form: "Formulario",-->
+<!--          footer_link_core: "Números centrales",-->
+<!--          footer_explore_title: "Explora",-->
+<!--          footer_explore_life: "Camino de Vida",-->
+<!--          footer_explore_soul: "Número del Alma",-->
+<!--          footer_explore_personality: "Número de Personalidad",-->
+<!--          footer_disclaimer_title: "Aviso",-->
+<!--          footer_disclaimer_text: "Esta experiencia es solo para reflexión y autoconocimiento y no reemplaza consejos profesionales, médicos o psicológicos.",-->
+<!--          footer_rights: "Todos los derechos reservados",-->
+
+<!--          share_whatsapp: "Compartir por WhatsApp",-->
+<!--          share_facebook: "Compartir en Facebook"-->
+<!--        }-->
+<!--      };-->
+
+<!--      const serverLang = "{{ lang }}";-->
+<!--      let currentLang = serverLang || localStorage.getItem("aura_lang") || "en";-->
+
+<!--      function applyTranslations(lang) {-->
+<!--        const dict = translations[lang] || translations.en;-->
+<!--        document.documentElement.setAttribute("lang", lang === "es" ? "es" : "en");-->
+
+<!--        // Cambiar título de la pestaña-->
+<!--        if (dict.page_title) {-->
+<!--          document.title = dict.page_title;-->
+<!--        }-->
+
+<!--        // Cambiar todos los textos con data-i18n-key-->
+<!--        document.querySelectorAll("[data-i18n-key]").forEach(function (el) {-->
+<!--          const key = el.getAttribute("data-i18n-key");-->
+<!--          if (!key) return;-->
+<!--          const value = dict[key];-->
+<!--          if (typeof value === "string") {-->
+<!--            el.innerHTML = value;-->
+<!--          }-->
+<!--        });-->
+
+<!--        // Estilos activos en botones de idioma-->
+<!--        document.querySelectorAll(".lang-toggle").forEach(function (btn) {-->
+<!--          btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);-->
+<!--        });-->
+
+<!--        currentLang = lang;-->
+<!--        localStorage.setItem("aura_lang", lang);-->
+<!--      }-->
+
+<!--      document.addEventListener("DOMContentLoaded", function () {-->
+<!--        const hasNumerology = {{ 'true' if numerology else 'false' }};-->
+<!--        const hasFormError = {{ 'true' if form_error else 'false' }};-->
+
+<!--        // Aplicar idioma desde servidor/localStorage-->
+<!--        applyTranslations(currentLang);-->
+
+<!--        // Language switcher: solo actualiza localStorage, dejamos que el link recargue la página-->
+<!--        document.querySelectorAll(".lang-toggle").forEach(function (btn) {-->
+<!--          btn.addEventListener("click", function () {-->
+<!--            const lang = this.getAttribute("data-lang") || "en";-->
+<!--            localStorage.setItem("aura_lang", lang);-->
+<!--          });-->
+<!--        });-->
+
+<!--        // Max date = today para DOB (backup in JS)-->
+<!--        const dobInput = document.getElementById("date_of_birth");-->
+<!--        if (dobInput && !dobInput.max) {-->
+<!--          const todayJs = new Date().toISOString().split("T")[0];-->
+<!--          dobInput.setAttribute("max", todayJs);-->
+<!--        }-->
+
+<!--        // Validación cliente: año 4 dígitos, no futuro-->
+<!--        const form = document.querySelector(".php-email-form");-->
+<!--        if (form) {-->
+<!--          form.addEventListener("submit", function (e) {-->
+<!--            const errorBox = document.querySelector(".error-message");-->
+<!--            if (errorBox) {-->
+<!--              errorBox.textContent = "";-->
+<!--            }-->
+
+<!--            const dob = document.getElementById("date_of_birth");-->
+<!--            if (!dob || !dob.value) return;-->
+
+<!--            const parts = dob.value.split("-");-->
+<!--            if (parts.length !== 3) return;-->
+
+<!--            const yearStr = parts[0];-->
+<!--            const year = parseInt(yearStr, 10);-->
+<!--            const month = parseInt(parts[1], 10) - 1;-->
+<!--            const day = parseInt(parts[2], 10);-->
+<!--            const inputDate = new Date(year, month, day);-->
+<!--            const today = new Date();-->
+
+<!--            let msg = "";-->
+
+<!--            if (yearStr.length !== 4 || isNaN(year)) {-->
+<!--              msg = currentLang === "es"-->
+<!--                ? "Por favor ingresa un año válido de 4 dígitos."-->
+<!--                : "Please enter a valid 4-digit year.";-->
+<!--            } else if (inputDate > today) {-->
+<!--              msg = currentLang === "es"-->
+<!--                ? "Tu fecha de nacimiento no puede estar en el futuro."-->
+<!--                : "Your date of birth cannot be in the future.";-->
+<!--            }-->
+
+<!--            if (msg) {-->
+<!--              e.preventDefault();-->
+<!--              if (errorBox) {-->
+<!--                errorBox.textContent = msg;-->
+<!--              } else {-->
+<!--                alert(msg);-->
+<!--              }-->
+<!--              return;-->
+<!--            }-->
+<!--          });-->
+<!--        }-->
+
+<!--        // Scroll a resultados solo si hay numerología y no hay error-->
+<!--        if (hasNumerology && !hasFormError) {-->
+<!--          const servicesSection = document.getElementById("services");-->
+<!--          if (servicesSection) {-->
+<!--            servicesSection.scrollIntoView({ behavior: "smooth" });-->
+<!--          }-->
+<!--        }-->
+
+<!--        // Share buttons (texto + link)-->
+<!--        const shareWhatsApp = document.getElementById("share-whatsapp");-->
+<!--        const shareFacebook = document.getElementById("share-facebook");-->
+
+<!--        function buildShareText() {-->
+<!--          const dict = translations[currentLang] || translations.en;-->
+<!--          const servicesTitleEl = document.querySelector("[data-i18n-key='services_title']");-->
+<!--          const headerText = servicesTitleEl-->
+<!--            ? servicesTitleEl.textContent.trim()-->
+<!--            : (dict.page_title || "AURA Numerology Blueprint");-->
+
+<!--          let text = headerText + "\n\n";-->
+
+<!--          const cards = document.querySelectorAll("#services .results-row .service-card");-->
+<!--          cards.forEach(function (card) {-->
+<!--            const title = card.querySelector("h3");-->
+<!--            const paragraphs = card.querySelectorAll("p");-->
+
+<!--            if (title) {-->
+<!--              text += "• " + title.textContent.trim() + "\n";-->
+<!--            }-->
+
+<!--            paragraphs.forEach(function (p) {-->
+<!--              const content = p.textContent.trim();-->
+<!--              if (content) {-->
+<!--                text += content + "\n";-->
+<!--              }-->
+<!--            });-->
+
+<!--            text += "\n";-->
+<!--          });-->
+
+<!--          const siteUrl = window.location.href.split("#")[0];-->
+<!--          text += "—\n" + siteUrl;-->
+
+<!--          return text;-->
+<!--        }-->
+
+<!--        if (shareWhatsApp) {-->
+<!--          shareWhatsApp.addEventListener("click", function () {-->
+<!--            const text = buildShareText();-->
+<!--            const url = "https://wa.me/?text=" + encodeURIComponent(text);-->
+<!--            window.open(url, "_blank");-->
+<!--          });-->
+<!--        }-->
+
+<!--        if (shareFacebook) {-->
+<!--          shareFacebook.addEventListener("click", function () {-->
+<!--            const text = buildShareText();-->
+<!--            const siteUrl = window.location.href.split("#")[0];-->
+<!--            const url = "https://www.facebook.com/sharer/sharer.php?u=" +-->
+<!--              encodeURIComponent(siteUrl) +-->
+<!--              "&quote=" + encodeURIComponent(text);-->
+<!--            window.open(url, "_blank");-->
+<!--          });-->
+<!--        }-->
+
+<!--      });-->
+<!--    })();-->
+<!--  </script>-->
+
+<!--</body>-->
+
+<!--</html>-->
