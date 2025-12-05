@@ -294,176 +294,169 @@
         <div class="identity-layout">
 
           <!-- Left: cards summarising core numbers (or placeholders) -->
-          <div>
-            <div class="identity-card-grid">
+          <!-- Left: cards summarising core numbers (or placeholders) -->
+            <div>
+              <div class="identity-card-grid">
 
-              <!-- Life Path -->
-              <article class="numerology-card">
-                <div class="card-header-row">
-                  <div class="card-icon">⟡</div>
-                  <h3 class="card-title">
-                    {% if numerology and numerology.life_path.title %}
-                      {{ numerology.life_path.title }}
-                    {% else %}
+                <!-- Life Path -->
+                <article class="numerology-card">
+                  <div class="card-header-row">
+                    <div class="card-icon">⟡</div>
+                    <h3 class="card-title">
+                      <!-- Fixed title: does NOT change with the result -->
                       <span data-i18n-key="ph_life_path_title">Life Path Number</span>
-                    {% endif %}
-                  </h3>
-                </div>
+                    </h3>
+                  </div>
 
-                {% if numerology %}
-                  <div class="card-number-label">
-                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
-                  </div>
-                  <div class="card-number">
-                    {{ numerology.life_path.number }}
-                  </div>
-                  {% if numerology.life_path.essence %}
-                    <p class="card-description">
-                      {{ numerology.life_path.essence }}
+                  {% if numerology %}
+                    <div class="card-number-label">
+                      {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                    </div>
+                    <div class="card-number">
+                      {{ numerology.life_path.number }}
+                    </div>
+                    {% if numerology.life_path.essence %}
+                      <p class="card-description">
+                        {{ numerology.life_path.essence }}
+                      </p>
+                    {% endif %}
+                  {% else %}
+                    <p class="card-description" data-i18n-key="ph_life_path_text">
+                      Your main life mission or path. It reveals the core of your personality,
+                      your innate talents and the major lessons you came to learn. It is the most
+                      influential number.
                     </p>
                   {% endif %}
-                {% else %}
-                  <p class="card-description" data-i18n-key="ph_life_path_text">
-                    Your main life mission or path. It reveals the core of your personality, your innate talents and the
-                    major lessons you came to learn. It is the most influential number.
-                  </p>
-                {% endif %}
-              </article>
+                </article>
 
-              <!-- Birthday -->
-              <article class="numerology-card">
-                <div class="card-header-row">
-                  <div class="card-icon">☼</div>
-                  <h3 class="card-title">
-                    {% if numerology and numerology.birthday.title %}
-                      {{ numerology.birthday.title }}
-                    {% else %}
-                      <span data-i18n-key="ph_birthday_title">Birthday Number</span>
+                <!-- Birth Day Gift -->
+                <article class="numerology-card">
+                  <div class="card-header-row">
+                    <div class="card-icon">☼</div>
+                    <h3 class="card-title">
+                      <!-- Fixed title -->
+                      <span data-i18n-key="ph_birthday_title">Birth Day Gift</span>
+                    </h3>
+                  </div>
+
+                  {% if numerology %}
+                    <div class="card-number-label">
+                      {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                    </div>
+                    <div class="card-number">
+                      {{ numerology.birthday.number }}
+                    </div>
+                    {# Show the main GIFT as the short meaning #}
+                    {% if numerology.birthday.gift %}
+                      <p class="card-description">
+                        {{ numerology.birthday.gift }}
+                      </p>
+                    {% elif numerology.birthday.essence %}
+                      <p class="card-description">
+                        {{ numerology.birthday.essence }}
+                      </p>
                     {% endif %}
-                  </h3>
-                </div>
-
-                {% if numerology %}
-                  <div class="card-number-label">
-                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
-                  </div>
-                  <div class="card-number">
-                    {{ numerology.birthday.number }}
-                  </div>
-                  {% if numerology.birthday.essence %}
-                    <p class="card-description">
-                      {{ numerology.birthday.essence }}
+                  {% else %}
+                    <p class="card-description" data-i18n-key="ph_birthday_text">
+                      A specific talent or trait that has been with you since birth. It acts as
+                      a supporting quality that reinforces your Life Path.
                     </p>
                   {% endif %}
-                {% else %}
-                  <p class="card-description" data-i18n-key="ph_birthday_text">
-                    A specific talent or trait that has been with you since birth. It acts as a supporting quality that
-                    reinforces your Life Path.
-                  </p>
-                {% endif %}
-              </article>
+                </article>
 
-              <!-- Expression / Destiny -->
-              <article class="numerology-card">
-                <div class="card-header-row">
-                  <div class="card-icon">📣</div>
-                  <h3 class="card-title">
-                    {% if numerology and numerology.expression.title %}
-                      {{ numerology.expression.title }}
-                    {% else %}
+                <!-- Expression / Destiny -->
+                <article class="numerology-card">
+                  <div class="card-header-row">
+                    <div class="card-icon">📣</div>
+                    <h3 class="card-title">
+                      <!-- Fixed title -->
                       <span data-i18n-key="ph_expression_title">Expression / Destiny</span>
-                    {% endif %}
-                  </h3>
-                </div>
+                    </h3>
+                  </div>
 
-                {% if numerology %}
-                  <div class="card-number-label">
-                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
-                  </div>
-                  <div class="card-number">
-                    {{ numerology.expression.number }}
-                  </div>
-                  {% if numerology.expression.essence %}
-                    <p class="card-description">
-                      {{ numerology.expression.essence }}
+                  {% if numerology %}
+                    <div class="card-number-label">
+                      {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                    </div>
+                    <div class="card-number">
+                      {{ numerology.expression.number }}
+                    </div>
+                    {% if numerology.expression.essence %}
+                      <p class="card-description">
+                        {{ numerology.expression.essence }}
+                      </p>
+                    {% endif %}
+                  {% else %}
+                    <p class="card-description" data-i18n-key="ph_expression_text">
+                      Your potential and abilities. It represents what you came here to do with your life,
+                      highlighting your tools, talents and ideal directions or careers.
                     </p>
                   {% endif %}
-                {% else %}
-                  <p class="card-description" data-i18n-key="ph_expression_text">
-                    Your potential and abilities. It represents what you came here to do with your life, highlighting
-                    your tools, talents and ideal directions or careers.
-                  </p>
-                {% endif %}
-              </article>
+                </article>
 
-              <!-- Soul Urge -->
-              <article class="numerology-card">
-                <div class="card-header-row">
-                  <div class="card-icon">❤</div>
-                  <h3 class="card-title">
-                    {% if numerology and numerology.soul_urge.title %}
-                      {{ numerology.soul_urge.title }}
-                    {% else %}
+                <!-- Soul Urge -->
+                <article class="numerology-card">
+                  <div class="card-header-row">
+                    <div class="card-icon">❤</div>
+                    <h3 class="card-title">
+                      <!-- Fixed title -->
                       <span data-i18n-key="ph_soul_title">Soul Urge</span>
-                    {% endif %}
-                  </h3>
-                </div>
+                    </h3>
+                  </div>
 
-                {% if numerology and numerology.soul_urge.number %}
-                  <div class="card-number-label">
-                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
-                  </div>
-                  <div class="card-number">
-                    {{ numerology.soul_urge.number }}
-                  </div>
-                  {% if numerology.soul_urge.essence %}
-                    <p class="card-description">
-                      {{ numerology.soul_urge.essence }}
+                  {% if numerology and numerology.soul_urge.number %}
+                    <div class="card-number-label">
+                      {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                    </div>
+                    <div class="card-number">
+                      {{ numerology.soul_urge.number }}
+                    </div>
+                    {% if numerology.soul_urge.essence %}
+                      <p class="card-description">
+                        {{ numerology.soul_urge.essence }}
+                      </p>
+                    {% endif %}
+                  {% else %}
+                    <p class="card-description" data-i18n-key="ph_soul_text">
+                      Your inner desires, motivations and impulses. It points to what makes you feel
+                      most fulfilled and what you truly long for deep inside.
                     </p>
                   {% endif %}
-                {% else %}
-                  <p class="card-description" data-i18n-key="ph_soul_text">
-                    Your inner desires, motivations and impulses. It points to what makes you feel most fulfilled and
-                    what you truly long for deep inside.
-                  </p>
-                {% endif %}
-              </article>
+                </article>
 
-              <!-- Personality -->
-              <article class="numerology-card">
-                <div class="card-header-row">
-                  <div class="card-icon">👁</div>
-                  <h3 class="card-title">
-                    {% if numerology and numerology.personality.title %}
-                      {{ numerology.personality.title }}
-                    {% else %}
+                <!-- Personality -->
+                <article class="numerology-card">
+                  <div class="card-header-row">
+                    <div class="card-icon">👁</div>
+                    <h3 class="card-title">
+                      <!-- Fixed title -->
                       <span data-i18n-key="ph_personality_title">Personality</span>
-                    {% endif %}
-                  </h3>
-                </div>
+                    </h3>
+                  </div>
 
-                {% if numerology and numerology.personality.number %}
-                  <div class="card-number-label">
-                    {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
-                  </div>
-                  <div class="card-number">
-                    {{ numerology.personality.number }}
-                  </div>
-                  {% if numerology.personality.essence %}
-                    <p class="card-description">
-                      {{ numerology.personality.essence }}
+                  {% if numerology and numerology.personality.number %}
+                    <div class="card-number-label">
+                      {% if lang == 'es' %}NÚMERO{% else %}NUMBER{% endif %}
+                    </div>
+                    <div class="card-number">
+                      {{ numerology.personality.number }}
+                    </div>
+                    {% if numerology.personality.essence %}
+                      <p class="card-description">
+                        {{ numerology.personality.essence }}
+                      </p>
+                    {% endif %}
+                  {% else %}
+                    <p class="card-description" data-i18n-key="ph_personality_text">
+                      The first impression you give to others. It is the social mask or outer image
+                      you project to the world.
                     </p>
                   {% endif %}
-                {% else %}
-                  <p class="card-description" data-i18n-key="ph_personality_text">
-                    The first impression you give to others. It is the social mask or outer image you project to the
-                    world.
-                  </p>
-                {% endif %}
-              </article>
+                </article>
 
+              </div>
             </div>
-          </div>
+
 
           <!-- Right: form panel -->
           <aside class="identity-form-panel">

@@ -304,6 +304,7 @@ def build_number_block(
     title = (
         data.get("title")
         or data.get("titulo")
+        or data.get("gift")  # added this
         or (default_title_es if lang == "es" else default_title_en)
     )
 
