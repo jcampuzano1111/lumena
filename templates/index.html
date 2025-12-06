@@ -1,248 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- Google Tag Manager -->
+<html lang="es"> <head>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5FWKKH7Z');</script>
-    <!-- End Google Tag Manager -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>LUMENA</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <!-- Favicons -->
-  <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
-  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <title>Lumena Aura | Lectura y Análisis de Energía y Numerología</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+    <meta name="description" content="Descubre Lumena Aura, la plataforma innovadora para el análisis de tu energía, numerología y bienestar espiritual. ¡Empieza tu camino de autoconocimiento hoy!">
+    <meta name="keywords" content="Lumena Aura, numerología, lectura de aura, energía, espiritualidad, bienestar, autoconocimiento, app, tecnología y bienestar">
+    <meta name="author" content="Lumena Aura Team">
+    <meta name="robots" content="index, follow">
 
-  <!-- Vendor CSS Files -->
-  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Lumena Aura">
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta property="og:title" content="Lumena Aura - Conecta con tu Potencial Energético">
+    <meta property="og:description" content="La herramienta definitiva para explorar tu camino de vida y energía personal a través de la numerología.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/social-preview.jpg', _external=True) }}">
 
-  <!-- Main CSS File -->
-  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lumena Aura | Análisis de Numerología y Aura">
+    <meta name="twitter:description" content="Explora tu energía y número de destino con la plataforma más intuitiva.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/social-preview.jpg', _external=True) }}">
 
-  <style>
-    .hero-cta {
-  margin-top: 1.75rem;
-}
 
-    .btn-hero-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.85rem 1.8rem;
-      border-radius: 999px;
-      background: #7E57C2;      /* purple */
-      color: #fdfbff;
-      font-weight: 600;
-      font-size: 0.98rem;
-      letter-spacing: 0.03em;
-      text-decoration: none;
-      border: none;
-      box-shadow: 0 12px 30px rgba(126, 87, 194, 0.28);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+    <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-    .btn-hero-cta:hover {
-      background: #6a3fb8;
-      box-shadow: 0 16px 40px rgba(106, 63, 184, 0.4);
-      transform: translateY(-1px);
-      text-decoration: none;
-      color: #fdfbff;
-    }
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
-    .btn-hero-cta:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 20px rgba(106, 63, 184, 0.3);
-    }
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
 
-    .language-switcher .lang-toggle.active {
-      font-weight: 700;
-      text-decoration: underline;
-    }
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
 
-    .share-buttons .btn-share {
-      min-width: 180px;
-    }
+    <style>
+        .hero-cta {
+            margin-top: 1.75rem;
+        }
 
-    .service-card {
-      height: 100%;
-    }
+        .btn-hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            background: #7E57C2;
+            /* purple */
+            color: #fdfbff;
+            font-weight: 600;
+            font-size: 0.98rem;
+            letter-spacing: 0.03em;
+            text-decoration: none;
+            border: none;
+            box-shadow: 0 12px 30px rgba(126, 87, 194, 0.28);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        }
 
-    .results-row .service-card {
-      display: flex;
-      flex-direction: column;
-    }
+        .btn-hero-cta:hover {
+            background: #6a3fb8;
+            box-shadow: 0 16px 40px rgba(106, 63, 184, 0.4);
+            transform: translateY(-1px);
+            text-decoration: none;
+            color: #fdfbff;
+        }
 
-    .results-row .service-card p,
-    .results-row .service-card .card-text {
-      flex-grow: 1;
-    }
+        .btn-hero-cta:active {
+            transform: translateY(0);
+            box-shadow: 0 8px 20px rgba(106, 63, 184, 0.3);
+        }
 
-    /* ===== NEW LAYOUT: CARDS + FORM (IDENTITY SECTION) ===== */
-    .identity-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 2rem;
-      align-items: flex-start;
-    }
+        .language-switcher .lang-toggle.active {
+            font-weight: 700;
+            text-decoration: underline;
+        }
 
-    .identity-card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
-    }
+        .share-buttons .btn-share {
+            min-width: 180px;
+        }
 
-    .identity-card-grid > :last-child {
-      grid-column: 1 / -1;
-    }
+        .service-card {
+            height: 100%;
+        }
 
-    .numerology-card {
-      background: #050910;
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 1px solid #202632;
-      color: #f5f5f5;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 170px;
-    }
+        .results-row .service-card {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .numerology-card .card-header-row {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 0.6rem;
-    }
+        .results-row .service-card p,
+        .results-row .service-card .card-text {
+            flex-grow: 1;
+        }
 
-    .numerology-card .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #252b39;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: #f5a623;
-      flex-shrink: 0;
-    }
+        /* ===== NEW LAYOUT: CARDS + FORM (IDENTITY SECTION) ===== */
+        .identity-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+            gap: 2rem;
+            align-items: flex-start;
+        }
 
-    .numerology-card .card-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin: 0;
-    }
+        .identity-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
 
-    .card-number-label {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.2rem;
-    }
+        .identity-card-grid>:last-child {
+            grid-column: 1 / -1;
+        }
 
-    .card-number {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
+        .numerology-card {
+            background: #050910;
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid #202632;
+            color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 170px;
+        }
 
-    .numerology-card .card-description {
-      font-size: 0.9rem;
-      color: #d1d5db;
-      line-height: 1.5;
-      margin: 0;
-    }
+        .numerology-card .card-header-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
 
-    .identity-form-panel {
-      background: #050910;
-      border-radius: 16px;
-      border: 1px solid #202632;
-      padding: 1.8rem 1.8rem 1.5rem 1.8rem;
-    }
+        .numerology-card .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #252b39;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #f5a623;
+            flex-shrink: 0;
+        }
 
-    .identity-form-panel .form-label {
-      color: #e5e7eb;
-    }
+        .numerology-card .card-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin: 0;
+        }
 
-    .identity-form-panel .form-control,
-    .identity-form-panel select.form-control {
-      background: #050910;
-      border-color: #374151;
-      color: #f5f5f5;
-    }
+        .card-number-label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.2rem;
+        }
 
-    .identity-form-panel .form-control:focus,
-    .identity-form-panel select.form-control:focus {
-      border-color: #f5a623;
-      box-shadow: none;
-    }
+        .card-number {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
 
-    /* ===== RESULTS BLOCKS (IN SERVICES SECTION) ===== */
-    .results-section {
-      margin-top: 2.5rem;
-    }
+        .numerology-card .card-description {
+            font-size: 0.9rem;
+            color: #d1d5db;
+            line-height: 1.5;
+            margin: 0;
+        }
 
-    .result-block {
-      margin-bottom: 2rem;
-      padding: 1.3rem 1.5rem;
-      border-radius: 14px;
-      background: #050910;
-      border: 1px solid #1f2937;
-    }
+        .identity-form-panel {
+            background: #050910;
+            border-radius: 16px;
+            border: 1px solid #202632;
+            padding: 1.8rem 1.8rem 1.5rem 1.8rem;
+        }
 
-    .result-block h3 {
-      margin: 0 0 0.4rem 0;
-      font-size: 1.25rem;
-    }
+        .identity-form-panel .form-label {
+            color: #e5e7eb;
+        }
 
-    .result-meta {
-      font-size: 0.85rem;
-      color: #9ca3af;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.65rem;
-    }
+        .identity-form-panel .form-control,
+        .identity-form-panel select.form-control {
+            background: #050910;
+            border-color: #374151;
+            color: #f5f5f5;
+        }
 
-    .result-essence {
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-      color: #e5e7eb;
-    }
+        .identity-form-panel .form-control:focus,
+        .identity-form-panel select.form-control:focus {
+            border-color: #f5a623;
+            box-shadow: none;
+        }
 
-    .result-body {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      color: #d1d5db;
-    }
+        /* ===== RESULTS BLOCKS (IN SERVICES SECTION) ===== */
+        .results-section {
+            margin-top: 2.5rem;
+        }
 
-    @media (max-width: 992px) {
-      .identity-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+        .result-block {
+            margin-bottom: 2rem;
+            padding: 1.3rem 1.5rem;
+            border-radius: 14px;
+            background: #050910;
+            border: 1px solid #1f2937;
+        }
 
-      .identity-card-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-  </style>
+        .result-block h3 {
+            margin: 0 0 0.4rem 0;
+            font-size: 1.25rem;
+        }
+
+        .result-meta {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.65rem;
+        }
+
+        .result-essence {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: #e5e7eb;
+        }
+
+        .result-body {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        @media (max-width: 992px) {
+            .identity-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .identity-card-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
 </head>
 
 <body class="index-page">

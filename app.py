@@ -11,6 +11,7 @@ from flask import (
     session,
     redirect,  # keep imported in case you want to re-add redirects later
 )
+from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import date, datetime
 
 # Importa los textos de numerología por idioma
@@ -18,6 +19,9 @@ from numerology_texts_en import NUMEROLOGY_TEXTS as NUM_TEXTS_EN
 from numerology_texts_es import NUMEROLOGY_TEXTS as NUM_TEXTS_ES
 
 app = Flask(__name__)
+# Esto le dice a Flask que confíe en que está detrás de un proxy HTTPS (Railway)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
 app.secret_key = "cambia_esta_clave_super_secreta"
 
 
