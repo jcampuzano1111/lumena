@@ -1,26 +1,21 @@
+
+
+
+
 # app.py
+
 from flask import (
     Flask,
     render_template,
     request,
     session,
-    redirect
+    redirect,  # keep imported in case you want to re-add redirects later
 )
-
-
-@app.before_request
-def enforce_https_in_production():
-    # Railway / proxies usually set X-Forwarded-Proto
-    proto = request.headers.get("X-Forwarded-Proto", "http")
-    if proto == "http":
-        url = request.url.replace("http://", "https://", 1)
-        return redirect(url, code=301)
 from datetime import date, datetime
 
 # Importa los textos de numerología por idioma
 from numerology_texts_en import NUMEROLOGY_TEXTS as NUM_TEXTS_EN
 from numerology_texts_es import NUMEROLOGY_TEXTS as NUM_TEXTS_ES
-
 
 app = Flask(__name__)
 app.secret_key = "cambia_esta_clave_super_secreta"
@@ -35,7 +30,8 @@ PLACEHOLDER_TEXTS = {
             "title": "Sendero de Vida (Life Path)",
             "description": (
                 "La misión principal o el camino de la vida. Revela la esencia de tu personalidad, "
-                "los talentos innatos y las lecciones mayores que viniste a aprender. Es el número más influyente."
+                "los talentos innatos y las lecciones mayores que viniste a aprender. "
+                "Es el número más influyente."
             ),
         },
         "birthday": {
@@ -72,7 +68,8 @@ PLACEHOLDER_TEXTS = {
             "title": "Life Path",
             "description": (
                 "Your main mission and life direction. It reveals the essence of your personality, "
-                "your innate talents, and the major lessons you came to learn. It is the most influential number."
+                "your innate talents, and the major lessons you came to learn. "
+                "It is the most influential number."
             ),
         },
         "birthday": {
@@ -85,8 +82,8 @@ PLACEHOLDER_TEXTS = {
         "expression": {
             "title": "Expression / Destiny Number",
             "description": (
-                "Your potential and abilities. It represents what you came to do with your life and shows "
-                "your natural tools, talents, and ideal career direction."
+                "Your potential and abilities. It represents what you came to do with your life "
+                "and shows your natural tools, talents, and ideal career direction."
             ),
         },
         "soul_urge": {
@@ -154,7 +151,6 @@ def get_texts_for_lang(lang: str) -> dict:
     return NUM_TEXTS_EN
 
 
-
 def get_placeholders_for_lang(lang: str) -> dict:
     """
     Devuelve los placeholders de las cards según el idioma.
@@ -178,7 +174,7 @@ def index():
         "index.html",
         lang=lang,
         today=today_str,
-        numerology=None,          # <- sin resultados aún
+        numerology=None,  # <- sin resultados aún
         form_error=None,
         card_placeholders=card_placeholders,
     )
@@ -314,7 +310,7 @@ def build_number_block(
     title = (
         data.get("title")
         or data.get("titulo")
-        or data.get("gift")  # added this
+        or data.get("gift")  # added this for Birth Day Gift cases
         or (default_title_es if lang == "es" else default_title_en)
     )
 
@@ -357,11 +353,16 @@ def build_number_block(
     }
 
 
-
 # ---------------------------
 # Cálculo de numerología con textos ES/EN
 # ---------------------------
-def calculate_numerology_with_texts(first_name, second_name, last_names, date_of_birth, lang="en"):
+def calculate_numerology_with_texts(
+    first_name,
+    second_name,
+    last_names,
+    date_of_birth,
+    lang="en",
+):
     texts = get_texts_for_lang(lang)
 
     # --- Números base (puedes reemplazar por tu lógica real) ---
@@ -372,7 +373,9 @@ def calculate_numerology_with_texts(first_name, second_name, last_names, date_of
     bd_number = reduce_to_digit(day)
 
     full_name = f"{first_name} {second_name} {last_names}".strip().upper()
-    letter_values = {c: (i % 9) + 1 for i, c in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ")}
+    letter_values = {
+        c: (i % 9) + 1 for i, c in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    }
 
     expr_sum = sum(letter_values.get(c, 0) for c in full_name if c.isalpha())
     ex_number = reduce_to_digit(expr_sum)
@@ -453,16 +456,20 @@ def calculate_numerology_with_texts(first_name, second_name, last_names, date_of
     for n in set(core_numbers.values()):
         if n in master_texts:
             special_numbers.append(n)
-            master_details.append({
-                "number": n,
-                "data": master_texts[n],
-            })
+            master_details.append(
+                {
+                    "number": n,
+                    "data": master_texts[n],
+                }
+            )
         if n in karmic_texts:
             special_numbers.append(n)
-            karmic_details.append({
-                "number": n,
-                "description": karmic_texts[n].get("description", ""),
-            })
+            karmic_details.append(
+                {
+                    "number": n,
+                    "description": karmic_texts[n].get("description", ""),
+                }
+            )
 
     special_numbers = sorted(set(special_numbers))
 
@@ -482,7 +489,3 @@ def calculate_numerology_with_texts(first_name, second_name, last_names, date_of
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
