@@ -4,7 +4,17 @@ from flask import (
     render_template,
     request,
     session,
+    redirect
 )
+
+
+@app.before_request
+def enforce_https_in_production():
+    # Railway / proxies usually set X-Forwarded-Proto
+    proto = request.headers.get("X-Forwarded-Proto", "http")
+    if proto == "http":
+        url = request.url.replace("http://", "https://", 1)
+        return redirect(url, code=301)
 from datetime import date, datetime
 
 # Importa los textos de numerología por idioma
